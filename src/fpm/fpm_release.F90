@@ -24,7 +24,7 @@ module fpm_release
 ! Accept solution from https://stackoverflow.com/questions/31649691/stringify-macro-with-gnu-gfortran
 ! which provides the "easiest" way to pass a macro to a string in Fortran complying with both
 ! gfortran's "traditional" cpp and the standard cpp syntaxes
-#ifdef __GFORTRAN__ /* traditional-cpp stringification */
+#if defined(__GFORTRAN__) || defined(__LFORTRAN__) /* traditional-cpp stringification */
 #  define STRINGIFY_START(X) "&
 #  define STRINGIFY_END(X) &X"
 #else               /* default stringification */

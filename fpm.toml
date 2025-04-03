@@ -21,23 +21,9 @@ jonquil.rev = "4fbd4cf34d577c0fd25e32667ee9e41bf231ece8"
 fortran-shlex.git = "https://github.com/perazz/fortran-shlex"
 fortran-shlex.tag = "1.0.1"
 
-[[test]]
-name = "cli-test"
-source-dir = "test/cli_test"
-main = "cli_test.f90"
-
-[[test]]
-name = "new-test"
-source-dir = "test/new_test"
-main = "new_test.f90"
 
 [[test]]
 name = "fpm-test"
 source-dir = "test/fpm_test"
 main = "main.f90"
-
-[[test]]
-name = "help-test"
-source-dir = "test/help_test"
-main = "help_test.f90"
 

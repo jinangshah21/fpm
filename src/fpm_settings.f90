@@ -13,17 +13,6 @@ module fpm_settings
   character(*), parameter :: official_registry_base_url = 'https://fpm-registry.vercel.app'
   character(*), parameter :: default_config_file_name = 'config.toml'
 
-  type :: fpm_global_settings
-    !> Path to the global config file excluding the file name.
-    character(len=:), allocatable :: path_to_config_folder
-    !> Name of the global config file. The default is `config.toml`.
-    character(len=:), allocatable :: config_file_name
-    !> Registry configs.
-    type(fpm_registry_settings), allocatable :: registry_settings
-  contains
-    procedure :: has_custom_location, full_path, path_to_config_folder_or_empty
-  end type
-
   type :: fpm_registry_settings
     !> The path to the local registry. If allocated, the local registry
     !> will be used instead of the remote registry and replaces the
@@ -37,6 +26,17 @@ module fpm_settings
     !> `%APPDATA%\local\fpm\dependencies` on Windows.
     !> Cannot be used together with `path`.
     character(len=:), allocatable :: cache_path
+  end type
+
+  type :: fpm_global_settings
+    !> Path to the global config file excluding the file name.
+    character(len=:), allocatable :: path_to_config_folder
+    !> Name of the global config file. The default is `config.toml`.
+    character(len=:), allocatable :: config_file_name
+    !> Registry configs.
+    type(fpm_registry_settings), allocatable :: registry_settings
+  contains
+    procedure :: has_custom_location, full_path, path_to_config_folder_or_empty
   end type
 
 contains

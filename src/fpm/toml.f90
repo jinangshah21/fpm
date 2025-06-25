@@ -148,7 +148,7 @@ contains
 
             !> Load from scratch file
             rewind(iunit)
-            allocate(copy,mold=self)
+            allocate(copy,source=self)
             call copy%load(iunit,error, json=ii==2)
             if (allocated(error)) then
                 error%message = formats(ii)//': '//error%message

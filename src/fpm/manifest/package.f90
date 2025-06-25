@@ -49,7 +49,7 @@ module fpm_manifest_package
     use fpm_error, only : error_t, fatal_error, syntax_error, bad_name_error
     use fpm_toml, only : toml_table, toml_array, toml_key, toml_stat, get_value, len, &
                          serializable_t, set_value, set_string, set_list, add_table
-    use fpm_versioning, only : version_t, new_version
+    use fpm_versioning
     implicit none
     private
 

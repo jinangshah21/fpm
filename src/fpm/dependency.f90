@@ -67,7 +67,7 @@ module fpm_dependency
   use fpm_strings, only: string_t, operator(.in.)
   use fpm_toml, only: toml_table, toml_key, toml_error, toml_serialize, &
                       get_value, set_value, add_table, toml_load, toml_stat, set_string
-  use fpm_versioning, only: version_t, new_version
+  use fpm_versioning
   use fpm_settings, only: fpm_global_settings, get_global_settings, official_registry_base_url
   use fpm_downloader, only: downloader_t
   use jonquil, only: json_object

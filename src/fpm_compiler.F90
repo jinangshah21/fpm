@@ -1458,9 +1458,9 @@ logical function check_fortran_source_runs(self, input) result(success)
     close(unit)  
     
     !> Compile and link program 
-    call self%compile_fortran(source, object, self%get_default_flags(release=.false.), logf, stat)
+    call self%compile_fortran(source, object, self%get_default_flags(.false.), logf, stat)
     if (stat==0) &
-    call self%link(exe, self%get_default_flags(release=.false.)//" "//object, logf, stat)
+    call self%link(exe, self%get_default_flags(.false.)//" "//object, logf, stat)
         
     !> Run and retrieve exit code 
     if (stat==0) &

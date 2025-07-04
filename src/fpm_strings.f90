@@ -59,8 +59,8 @@ type string_t
 end type
 
 interface len_trim
-    module procedure :: string_len_trim
     module procedure :: strings_len_trim
+    module procedure :: string_len_trim
 end interface len_trim
 
 interface resize
@@ -95,8 +95,8 @@ interface f_string
 end interface f_string
 
 interface operator(==)
-    module procedure string_is_same
     module procedure string_arrays_same
+    module procedure string_is_same
 end interface
 
 contains

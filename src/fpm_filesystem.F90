@@ -21,7 +21,7 @@ module fpm_filesystem
     interface
         function c_opendir(dir) result(r) bind(c, name="c_opendir")
             import c_char, c_ptr
-            character(kind=c_char), intent(in) :: dir(*)
+            character(kind=c_char), intent(in) :: dir
             type(c_ptr) :: r
         end function c_opendir
 
@@ -45,7 +45,7 @@ module fpm_filesystem
 
         function c_is_dir(path) result(r) bind(c, name="c_is_dir")
             import c_char, c_int
-            character(kind=c_char), intent(in) :: path(*)
+            character(kind=c_char), intent(in) :: path
             integer(kind=c_int) :: r
         end function c_is_dir
     end interface

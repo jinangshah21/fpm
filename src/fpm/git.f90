@@ -258,7 +258,7 @@ contains
         character(len=*), parameter :: hexdigits = '0123456789abcdef'
 
         workdir = "--work-tree="//local_path//" --git-dir="//join_path(local_path, ".git")
-        allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
         line = "git "//workdir//" log -n 1 > "//temp_file
         call execute_command_line(line, exitstat=stat)
 

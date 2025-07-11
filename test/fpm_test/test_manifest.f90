@@ -678,8 +678,9 @@ contains
         character(:), allocatable :: temp_file
         integer :: unit
 
-        allocate(temp_file, source=get_temp_filename())
-
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
+        
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
             & 'name = "example"', &
@@ -722,7 +723,8 @@ contains
         integer :: unit
         type(error_t), allocatable :: build_error
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -767,7 +769,8 @@ contains
         character(:), allocatable :: temp_file
         integer :: unit
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -808,7 +811,8 @@ contains
         character(:), allocatable :: temp_file
         integer :: unit
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -1424,7 +1428,8 @@ contains
         integer :: unit
         integer(compiler_enum)  :: id
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -1462,9 +1467,10 @@ contains
         integer :: unit
         integer(compiler_enum)  :: id
 
-        allocate(toml_file_package, source=get_temp_filename())
-        allocate(toml_file_dependency, source=get_temp_filename())
-
+        ! allocate(toml_file_package, source=get_temp_filename())
+        toml_file_package = get_temp_filename()
+        ! allocate(toml_file_dependency, source=get_temp_filename())
+        toml_file_dependency = get_temp_filename()
         open(file=toml_file_package, newunit=unit)
         write(unit, '(a)') &
             & 'name = "example"', &

@@ -322,7 +322,8 @@ function read_lines_expanded(filename) result(lines)
     ! allocate lines from file content string
     allocate (lines(size(first)))
     do i = 1, size(first)
-        allocate(lines(i)%s, source=dilate(content(first(i):last(i))))
+        ! allocate(lines(i)%s, source=dilate(content(first(i):last(i))))
+        lines(i)%s = dilate(content(first(i):last(i)))
     end do
 
 end function read_lines_expanded
@@ -347,7 +348,8 @@ function read_lines(filename) result(lines)
     ! allocate lines from file content string
     allocate (lines(size(first)))
     do i = 1, size(first)
-        allocate(lines(i)%s, source=content(first(i):last(i)))
+        ! allocate(lines(i)%s, source=content(first(i):last(i)))
+        lines(i)%s = dilate(content(first(i):last(i)))
     end do
 
 end function read_lines
@@ -500,7 +502,8 @@ recursive subroutine list_files(dir, files, recurse)
         return
     end if
 
-    allocate (temp_file, source=get_temp_filename())
+    ! allocate (temp_file, 
+    temp_file=get_temp_filename()
 
     select case (get_os_type())
         case (OS_UNKNOWN, OS_LINUX, OS_MACOS, OS_CYGWIN, OS_SOLARIS, OS_FREEBSD, OS_OPENBSD)

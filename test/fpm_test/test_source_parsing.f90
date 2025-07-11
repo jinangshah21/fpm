@@ -64,7 +64,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -138,7 +139,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -207,7 +209,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -279,7 +282,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -337,7 +341,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -394,7 +399,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -452,7 +458,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -485,7 +492,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -570,7 +578,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -622,7 +631,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -688,7 +698,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -769,7 +780,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -833,7 +845,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -891,7 +904,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -950,7 +964,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -1009,7 +1024,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -1059,7 +1075,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
         temp_file = temp_file//'.c'
 
         open(file=temp_file, newunit=unit)
@@ -1130,7 +1147,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -1158,7 +1176,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -1185,7 +1204,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &
@@ -1211,7 +1231,8 @@ contains
         character(:), allocatable :: temp_file
         type(srcfile_t), allocatable :: f_source
 
-        allocate(temp_file, source=get_temp_filename())
+        ! allocate(temp_file, source=get_temp_filename())
+        temp_file=get_temp_filename()
 
         open(file=temp_file, newunit=unit)
         write(unit, '(a)') &

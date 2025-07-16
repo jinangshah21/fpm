@@ -448,6 +448,7 @@ subroutine add_target(targets, package, type, output_name, source, link_librarie
 
     integer :: i
     type(build_target_t), pointer :: new_target
+    type(build_target_ptr) :: tmp_ptr
 
     if (.not.allocated(targets)) allocate(targets(0))
 
@@ -477,8 +478,8 @@ subroutine add_target(targets, package, type, output_name, source, link_librarie
     endif
     if (present(version)) new_target%version = version
     allocate(new_target%dependencies(0))
-
-    targets = [targets, build_target_ptr(new_target)]
+    tmp_ptr%ptr => new_target
+    targets = [targets, tmp_ptr]
 
 end subroutine add_target
 
@@ -487,8 +488,10 @@ end subroutine add_target
 subroutine add_dependency(target, dependency)
     type(build_target_t), intent(inout) :: target
     type(build_target_t) , intent(in), target :: dependency
+    type(build_target_ptr) :: tmp_ptr
 
-    target%dependencies = [target%dependencies, build_target_ptr(dependency)]
+    tmp_ptr%ptr => dependency
+    target%dependencies = [target%dependencies, tmp_ptr]
 
 end subroutine add_dependency
 

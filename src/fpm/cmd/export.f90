@@ -58,7 +58,7 @@ contains
     !> Export full model
     if (len_trim(settings%dump_model)>0) then
 
-        call build_model(model, settings%fpm_build_settings, package, error)
+        call build_model(model, settings, package, error)
         if (allocated(error)) then
             call fpm_stop(1,'*cmd_export* Model error: '//error%message)
         end if

@@ -47,31 +47,56 @@ implicit none
 public :: compiler_t, new_compiler, archiver_t, new_archiver, get_macros
 public :: debug
 
-enum, bind(C)
-    enumerator :: &
-        id_unknown, &
-        id_gcc, &
-        id_f95, &
-        id_caf, &
-        id_intel_classic_nix, &
-        id_intel_classic_mac, &
-        id_intel_classic_windows, &
-        id_intel_llvm_nix, &
-        id_intel_llvm_windows, &
-        id_intel_llvm_unknown, &
-        id_pgi, &
-        id_nvhpc, &
-        id_nag, &
-        id_flang, &
-        id_flang_new, &
-        id_f18, &
-        id_ibmxl, &
-        id_cray, &
-        id_lahey, &
-        id_lfortran
-end enum
-integer, parameter :: compiler_enum = kind(id_unknown)
+! enum, bind(C)
+!     enumerator :: &
+!         id_unknown, &
+!         id_gcc, &
+!         id_f95, &
+!         id_caf, &
+!         id_intel_classic_nix, &
+!         id_intel_classic_mac, &
+!         id_intel_classic_windows, &
+!         id_intel_llvm_nix, &
+!         id_intel_llvm_windows, &
+!         id_intel_llvm_unknown, &
+!         id_pgi, &
+!         id_nvhpc, &
+!         id_nag, &
+!         id_flang, &
+!         id_flang_new, &
+!         id_f18, &
+!         id_ibmxl, &
+!         id_cray, &
+!         id_lahey, &
+!         id_lfortran
+! end enum
+! integer, parameter :: compiler_enum = kind(id_unknown)
 
+! Define kind of constants
+  integer, parameter :: compiler_enum = selected_int_kind(8)
+
+  ! Manually define each constant with incremental integer values
+  integer(compiler_enum), parameter :: &
+       id_unknown             = 0, &
+       id_gcc                 = 1, &
+       id_f95                 = 2, &
+       id_caf                 = 3, &
+       id_intel_classic_nix   = 4, &
+       id_intel_classic_mac   = 5, &
+       id_intel_classic_windows = 6, &
+       id_intel_llvm_nix      = 7, &
+       id_intel_llvm_windows  = 8, &
+       id_intel_llvm_unknown  = 9, &
+       id_pgi                 = 10, &
+       id_nvhpc               = 11, &
+       id_nag                 = 12, &
+       id_flang               = 13, &
+       id_flang_new           = 14, &
+       id_f18                 = 15, &
+       id_ibmxl               = 16, &
+       id_cray                = 17, &
+       id_lahey               = 18, &
+       id_lfortran            = 19
 
 !> Definition of compiler object
 type, extends(serializable_t) :: compiler_t

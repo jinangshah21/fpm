@@ -298,11 +298,11 @@ subroutine resolve_cmd(self,settings,error)
     ! Add customize run commands
     if (self%has_run_command) then
 
-        select type (cmd=>settings)
+        select type (settings)
            class is (fpm_run_settings) ! includes fpm_test_settings
 
               ! Only override runner if user has not provided a custom one
-              if (.not.len_trim(cmd%runner)>0) cmd%runner = self%run_command%s
+              if (.not.len_trim(settings%runner)>0) settings%runner = self%run_command%s
 
         end select
 

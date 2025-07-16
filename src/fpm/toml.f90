@@ -270,7 +270,7 @@ contains
            call json_load(object, unit, error=local_error)
            if (allocated(local_error)) then
               allocate (error)
-              call move_alloc(local_error%message, error%message)
+            !   call move_alloc(local_error%message, error%message)
               return
            end if
 
@@ -290,7 +290,7 @@ contains
 
            if (allocated(local_error)) then
               allocate (error)
-              call move_alloc(local_error%message, error%message)
+            !   call move_alloc(local_error%message, error%message)
               return
            end if
 
@@ -332,7 +332,7 @@ contains
 
         if (allocated(parse_error)) then
             allocate (error)
-            call move_alloc(parse_error%message, error%message)
+            ! call move_alloc(parse_error%message, error%message)
             return
         end if
 
@@ -391,7 +391,7 @@ contains
                     call fatal_error(error, "Entry in "//key//" field cannot be read")
                     exit
                 end if
-                call move_alloc(str, list(ilist)%s)
+                ! call move_alloc(str, list(ilist)%s)
             end do
             if (allocated(error)) return
         else
@@ -402,7 +402,7 @@ contains
             end if
             if (allocated(str)) then
                 allocate (list(1))
-                call move_alloc(str, list(1)%s)
+                ! call move_alloc(str, list(1)%s)
             end if
         end if
 

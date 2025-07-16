@@ -1018,7 +1018,7 @@ contains
 
     if (allocated(parse_error)) then
       allocate (error)
-      call move_alloc(parse_error%message, error%message)
+      ! call move_alloc(parse_error%message, error%message)
       return
     end if
 
@@ -1181,7 +1181,7 @@ contains
 
     if (allocated(var)) then
       this_size = size(var, 1)
-      call move_alloc(var, tmp)
+      ! call move_alloc(var, tmp)
     else
       this_size = initial_size
     end if

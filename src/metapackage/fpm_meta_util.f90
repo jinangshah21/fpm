@@ -144,7 +144,7 @@ module fpm_meta_util
            tmp(i) = list(i)
         end do   
         tmp(n+1) = new
-        call move_alloc(from=tmp,to=list)
+        ! call move_alloc(from=tmp,to=list)
 
     end subroutine add_strings_one       
     
@@ -172,7 +172,7 @@ module fpm_meta_util
         do i=1,add
            tmp(n+i) = new(i)
         end do   
-        call move_alloc(from=tmp,to=list)
+        ! call move_alloc(from=tmp,to=list)
 
     end subroutine add_strings_many     
     

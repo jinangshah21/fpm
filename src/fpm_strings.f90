@@ -659,7 +659,7 @@ subroutine resize_string(list, n)
 
   if (allocated(list)) then
     this_size = size(list, 1)
-    call move_alloc(list, tmp)
+    ! call move_alloc(list, tmp)
   else
     this_size = initial_size
   end if
@@ -675,7 +675,7 @@ subroutine resize_string(list, n)
   if (allocated(tmp)) then
     this_size = min(size(tmp, 1), size(list, 1))
     do i = 1, this_size
-      call move_alloc(tmp(i)%s, list(i)%s)
+    !   call move_alloc(tmp(i)%s, list(i)%s)
     end do
     deallocate(tmp)
   end if

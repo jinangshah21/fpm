@@ -178,8 +178,8 @@ function pkgcfg_list_all(error,descriptions) result(modules)
         
     end do
     
-    call move_alloc(from=mods,to=modules)
-    if (present(descriptions)) call move_alloc(from=descr,to=descriptions)
+    ! call move_alloc(from=mods,to=modules)
+    ! if (present(descriptions)) call move_alloc(from=descr,to=descriptions)
     
 end function pkgcfg_list_all
     

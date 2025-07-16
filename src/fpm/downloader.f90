@@ -41,7 +41,7 @@ contains
 
     call json_load(j_value, tmp_pkg_file, error=j_error)
     if (allocated(j_error)) then
-      allocate (error); call move_alloc(j_error%message, error%message); call json%destroy(); return
+      ! allocate (error); call move_alloc(j_error%message, error%message); call json%destroy(); return
     end if
 
     ptr => cast_to_object(j_value)

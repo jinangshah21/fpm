@@ -575,7 +575,7 @@ contains
             call get_char_arg(install_settings%testdir, 'testdir')
             call get_char_arg(install_settings%bindir, 'bindir')
             call get_char_arg(install_settings%includedir, 'includedir')
-            call move_alloc(install_settings, cmd_settings)
+            ! call move_alloc(install_settings, cmd_settings)
 
         case('list')
             call set_args(common_args // '&
@@ -704,7 +704,7 @@ contains
             call get_char_arg(export_settings%dump_model, 'model')
             call get_char_arg(export_settings%dump_manifest, 'manifest')
             call get_char_arg(export_settings%dump_dependencies, 'dependencies')
-            call move_alloc(export_settings, cmd_settings)
+            ! call move_alloc(export_settings, cmd_settings)
 
 
         case('clean')
@@ -806,7 +806,7 @@ contains
 
         if (allocated(cmd_settings)) then
             working_dir = sget("directory")
-            call move_alloc(working_dir, cmd_settings%working_dir)
+            ! call move_alloc(working_dir, cmd_settings%working_dir)
         end if
 
     contains

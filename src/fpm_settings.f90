@@ -91,7 +91,7 @@ contains
     call toml_load(table, global_settings%full_path(), error=parse_error)
 
     if (allocated(parse_error)) then
-      allocate (error); call move_alloc(parse_error%message, error%message); return
+      ! allocate (error); call move_alloc(parse_error%message, error%message); return
     end if
 
     call get_value(table, 'registry', registry_table, requested=.false., stat=stat)

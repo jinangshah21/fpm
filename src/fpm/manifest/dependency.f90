@@ -133,7 +133,7 @@ contains
         if (allocated(uri)) then
             if (get_os_type() == OS_WINDOWS) uri = windows_path(uri)
             if (present(root)) uri = join_path(root,uri)  ! Relative to the fpm.toml it’s written in
-            call move_alloc(uri, self%path)
+            ! call move_alloc(uri, self%path)
             return
         end if
 
@@ -544,7 +544,7 @@ contains
 
         if (allocated(var)) then
           this_size = size(var, 1)
-          call move_alloc(var, tmp)
+        !   call move_alloc(var, tmp)
         else
           this_size = initial_size
         end if
@@ -594,7 +594,7 @@ contains
                 allocate(new_preprocess(n+1))
                 new_preprocess(1:n) = dep%preprocess
                 new_preprocess(n+1) = preprocess
-                call move_alloc(from=new_preprocess,to=dep%preprocess)
+                ! call move_alloc(from=new_preprocess,to=dep%preprocess)
                 
             end if
         else

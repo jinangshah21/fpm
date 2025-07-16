@@ -53,7 +53,7 @@ contains
     if (.not. exists('fpm.toml')) call fpm_stop(1, "Cannot find 'fpm.toml' file. Are you in the project root?")
 
     ! Build model to obtain dependency tree.
-    call build_model(model, settings%fpm_build_settings, package, error)
+    call build_model(model, settings, package, error)
     if (allocated(error)) call fpm_stop(1, '*cmd_build* Model error: '//error%message)
 
     ! Check if package contains git dependencies. Only publish packages without git dependencies.
@@ -103,7 +103,7 @@ contains
       print *, 'Dry run successful. Generated tarball: ', tmp_file; return
     end if
 
-    call downloader%upload_form(official_registry_base_url//'/packages', upload_data, settings%verbose, error)
+    ! call downloader%upload_form(official_registry_base_url//'/packages', upload_data, settings%verbose, error)
     call delete_file(tmp_file)
     if (allocated(error)) call fpm_stop(1, '*cmd_publish* Upload error: '//error%message)
   end

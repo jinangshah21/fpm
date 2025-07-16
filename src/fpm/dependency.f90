@@ -228,7 +228,7 @@ contains
     !> Dependency should be updated
     logical, intent(in), optional :: update
 
-    self%dependency_config_t = dependency
+    ! self%dependency_config_t = dependency
 
     if (present(version)) then
       self%version = version
@@ -266,7 +266,7 @@ contains
     end if
 
     !> Call base object info
-    call self%dependency_config_t%info(unit, pr)
+    ! call self%dependency_config_t%info(unit, pr)
 
     if (allocated(self%version)) then
       write (unit, fmt) "- version", self%version%s()
@@ -329,7 +329,7 @@ contains
       ! Skip root node
       do id = 2, cached%ndep
         cached%dep(id)%cached = .true.
-        call self%add(cached%dep(id), error)
+        ! call self%add_dependency_node(cached%dep(id), error)
         if (allocated(error)) return
       end do
     end if
@@ -1278,7 +1278,7 @@ contains
          type is (dependency_node_t)
 
             ! Base class must match
-            if (.not.(this%dependency_config_t==other%dependency_config_t)) return
+            ! if (.not.(this%dependency_config_t==other%dependency_config_t)) return
 
             ! Extension must match
             if (.not.(this%done  .eqv.other%done)) return
@@ -1317,7 +1317,7 @@ contains
         integer :: ierr
 
         ! Dump parent class
-        call self%dependency_config_t%dump_to_toml(table, error)
+        ! call self%dependency_config_t%dump_to_toml(table, error)
         if (allocated(error)) return
 
         if (allocated(self%version)) then
@@ -1356,7 +1356,7 @@ contains
         call destroy_dependency_node(self)
 
         ! Load parent class
-        call self%dependency_config_t%load_from_toml(table, error)
+        ! call self%dependency_config_t%load_from_toml(table, error)
         if (allocated(error)) return
 
         call get_value(table, "done", self%done, error, 'dependency_node_t')

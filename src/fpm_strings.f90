@@ -219,7 +219,7 @@ function f_string_cptr_n(cptr, n) result(s)
     character(len=n,kind=c_char) :: s
     character(len=n,kind=c_char), pointer :: sptr
 
-    call c_f_pointer(cptr, sptr)
+    ! call c_f_pointer(cptr, sptr)
     s = sptr
 end function
 

@@ -191,8 +191,8 @@ contains
             return
         end if
     end if
-    
-    call self%install(executable, self%bindir, error)
+
+    ! call self%install(executable, self%bindir, error)
 
     ! on MacOS, add two relative paths for search of dynamic library dependencies: 
     add_rpath: if (self%os==OS_MACOS) then  
@@ -272,7 +272,7 @@ contains
         end if
     end if
 
-    call self%install(test, self%testdir, error)
+    ! call self%install(test, self%testdir, error)
 
   end subroutine install_test
 

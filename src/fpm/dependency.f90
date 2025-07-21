@@ -370,14 +370,14 @@ contains
 
     if (main) then
       if (allocated(package%dev_dependency)) then
-        call self%add(package%dev_dependency, error)
+        ! call self%add(package%dev_dependency, error)
         if (allocated(error)) return
       end if
 
       if (allocated(package%executable)) then
         do ii = 1, size(package%executable)
           if (allocated(package%executable(ii)%dependency)) then
-            call self%add(package%executable(ii)%dependency, error)
+          !   call self%add(package%executable(ii)%dependency, error)
             if (allocated(error)) exit
           end if
         end do
@@ -387,7 +387,7 @@ contains
       if (allocated(package%example)) then
         do ii = 1, size(package%example)
           if (allocated(package%example(ii)%dependency)) then
-            call self%add(package%example(ii)%dependency, error)
+          !   call self%add(package%example(ii)%dependency, error)
             if (allocated(error)) exit
           end if
         end do
@@ -397,7 +397,7 @@ contains
       if (allocated(package%test)) then
         do ii = 1, size(package%test)
           if (allocated(package%test(ii)%dependency)) then
-            call self%add(package%test(ii)%dependency, error)
+          !   call self%add(package%test(ii)%dependency, error)
             if (allocated(error)) exit
           end if
         end do

@@ -185,7 +185,7 @@ contains
         end if
     end if
 
-    call self%install(executable, self%bindir, error)
+    ! call self%install(executable, self%bindir, error)
 
   end subroutine install_executable
 
@@ -219,7 +219,7 @@ contains
         end if
     end if
 
-    call self%install(test, self%testdir, error)
+    ! call self%install(test, self%testdir, error)
 
   end subroutine install_test
 

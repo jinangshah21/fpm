@@ -912,7 +912,7 @@ subroutine prune_build_targets(targets, root_package, prune_unused_objects)
         end associate
     end do
 
-    targets = pack(targets,.not.exclude_target)
+    ! targets = pack(targets,.not.exclude_target)
 
     ! Remove unused targets from library dependency list
     do j=1,size(targets)
@@ -932,7 +932,7 @@ subroutine prune_build_targets(targets, root_package, prune_unused_objects)
 
                     end do
 
-                archive%dependencies = pack(archive%dependencies,.not.exclude_from_archive)
+                ! archive%dependencies = pack(archive%dependencies,.not.exclude_from_archive)
                 
                 deallocate(exclude_from_archive)
             

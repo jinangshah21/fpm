@@ -136,7 +136,7 @@ function pkgcfg_list_all(error,descriptions) result(modules)
     type(string_t), allocatable :: modules(:)    
     
     !> An optional list of package descriptions
-    type(string_t), optional, allocatable, intent(out) :: descriptions(:)
+    type(string_t), optional, intent(out) :: descriptions(:)
     
     integer :: exitcode,i,spc
     logical :: success

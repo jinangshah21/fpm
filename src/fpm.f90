@@ -652,8 +652,7 @@ subroutine cmd_run(settings,test)
                 exe_source => exe_target%dependencies(1)%ptr%source
 
                 if (exe_source%unit_scope == run_scope) then
-                    write(stderr,'(A)',advance=(merge("yes","no ",modulo(jj,nCol)==0))) &
-                        & [character(len=col_width) :: basename(exe_target%output_file, suffix=.false.)]
+                    write(stderr,'(A)',advance=(merge("yes","no ",modulo(jj,nCol)==0))) basename(exe_target%output_file, suffix=.false.)
                     jj = jj + 1
                 end if
             end if
@@ -668,8 +667,7 @@ subroutine cmd_run(settings,test)
         nCol = LINE_WIDTH/col_width
         write(stderr,*) 'Matched names:'
         do ii=1,size(executables)
-            write(stderr,'(A)',advance=(merge("yes","no ",modulo(jj,nCol)==0))) &
-                & [character(len=col_width) :: basename(executables(ii)%s, suffix=.false.)]
+            write(stderr,'(A)',advance=(merge("yes","no ",modulo(jj,nCol)==0))) basename(executables(ii)%s, suffix=.false.)
             jj = jj + 1
         end do
         write(stderr,*)

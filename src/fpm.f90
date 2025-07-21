@@ -485,7 +485,7 @@ subroutine cmd_run(settings,test)
     type(srcfile_t), pointer :: exe_source
     integer :: run_scope,firsterror
     integer, allocatable :: stat(:),target_ID(:)
-    character(len=:),allocatable :: line
+    character(len=:),allocatable :: line, temp
 
     call get_package_data(package, "fpm.toml", error, apply_defaults=.true.)
     if (allocated(error)) then
@@ -583,11 +583,12 @@ subroutine cmd_run(settings,test)
         do i=1,size(executables)
             if (exists(executables(i)%s)) then
                 if(settings%runner /= ' ')then
+                    temp = settings%runner_command()
                     if(.not.allocated(settings%args))then
-                       call run(settings%runner_command()//' '//executables(i)%s, &
+                       call run(temp//' '//executables(i)%s, &
                              echo=settings%verbose, exitstat=stat(i))
                     else
-                       call run(settings%runner_command()//' '//executables(i)%s//" "//settings%args, &
+                       call run(temp//' '//executables(i)%s//" "//settings%args, &
                              echo=settings%verbose, exitstat=stat(i))
                     endif
                 else

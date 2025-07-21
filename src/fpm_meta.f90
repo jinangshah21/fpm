@@ -1271,7 +1271,7 @@ subroutine assert_mpi_wrappers(wrappers,compiler,verbose)
     end do
 
     ! Filter out non-working wrappers
-    wrappers = pack(wrappers,works/=MPI_TYPE_NONE)
+    ! wrappers = pack(wrappers,works/=MPI_TYPE_NONE)
 
 end subroutine assert_mpi_wrappers
 

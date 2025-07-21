@@ -723,7 +723,7 @@ subroutine prune_build_targets(targets, root_package)
         end associate
     end do
 
-    targets = pack(targets,.not.exclude_target)
+    ! targets = pack(targets,.not.exclude_target)
 
     ! Remove unused targets from archive dependency list
     if (targets(1)%ptr%target_type == FPM_TARGET_ARCHIVE) then
@@ -742,7 +742,7 @@ subroutine prune_build_targets(targets, root_package)
 
             end do
 
-            archive%dependencies = pack(archive%dependencies,.not.exclude_from_archive)
+            ! archive%dependencies = pack(archive%dependencies,.not.exclude_from_archive)
 
         end associate
     end if

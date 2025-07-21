@@ -338,7 +338,7 @@ subroutine check_modules_for_duplicates(model, duplicates_found)
                 " in ",model%packages(k)%sources(l)%file_name," is a duplicate"
               duplicates_found = .true.
             else
-              modules(modi) = model%packages(k)%sources(l)%modules_provided(m)
+              modules(modi)%s = model%packages(k)%sources(l)%modules_provided(m)%s
               modi = modi + 1
             end if
           end do
@@ -387,7 +387,7 @@ subroutine check_module_names(model, error)
 
                 do m=1,size(model%packages(k)%sources(l)%modules_provided)
 
-                    module_name = model%packages(k)%sources(l)%modules_provided(m)
+                    module_name%s = model%packages(k)%sources(l)%modules_provided(m)%s
 
                     valid = is_valid_module_name(module_name, &
                                                  package_name, &

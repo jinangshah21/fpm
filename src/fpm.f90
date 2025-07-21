@@ -495,7 +495,7 @@ subroutine cmd_run(settings,test)
     type(srcfile_t), pointer :: exe_source
     integer :: run_scope,firsterror
     integer, allocatable :: stat(:),target_ID(:)
-    character(len=:),allocatable :: line,run_cmd,library_path
+    character(len=:),allocatable :: line,run_cmd,library_path,temp
 
     call get_package_data(package, "fpm.toml", error, apply_defaults=.true.)
     if (allocated(error)) then

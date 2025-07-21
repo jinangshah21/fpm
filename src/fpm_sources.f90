@@ -125,7 +125,7 @@ subroutine add_sources_from_dir(sources,directory,scope,with_executables,with_f_
                  str_ends_with(lower(file_names(i)%s), c_suffixes) ),i=1,size(file_names))]
 
 
-    src_file_names = pack(file_names,is_source)
+    ! src_file_names = pack(file_names,is_source)
 
     allocate(dir_sources(size(src_file_names)))
     allocate(exclude_source(size(src_file_names)))
@@ -152,9 +152,9 @@ subroutine add_sources_from_dir(sources,directory,scope,with_executables,with_f_
     end do
 
     if (.not.allocated(sources)) then
-        sources = pack(dir_sources,.not.exclude_source)
+        ! sources = pack(dir_sources,.not.exclude_source)
     else
-        sources = [sources, pack(dir_sources,.not.exclude_source)]
+        ! sources = [sources, pack(dir_sources,.not.exclude_source)]
     end if
 
 end subroutine add_sources_from_dir

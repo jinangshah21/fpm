@@ -197,7 +197,7 @@ recursive subroutine sort_target(target)
 
         allocate(target%digest_cached)
         open(newunit=fh,file=target%output_file//'.digest',status='old')
-        read(fh,*,iostat=stat) target%digest_cached
+        ! read(fh,*,iostat=stat) target%digest_cached
         close(fh)
 
         if (stat /= 0) then    ! Cached digest is not recognized

@@ -348,25 +348,25 @@ contains
             val_runner=sget('runner')
             if(specified('runner') .and. val_runner=='')val_runner='echo'
 
-            cmd_settings=fpm_run_settings(&
-            & args=remaining,&
-            & profile=val_profile,&
-            & prune=.not.lget('no-prune'), &
-            & compiler=val_compiler, &
-            & c_compiler=c_compiler, &
-            & cxx_compiler=cxx_compiler, &
-            & archiver=archiver, &
-            & flag=val_flag, &
-            & cflag=val_cflag, &
-            & cxxflag=val_cxxflag, &
-            & ldflag=val_ldflag, &
-            & example=lget('example'), &
-            & list=lget('list'),&
-            & build_tests=.false.,&
-            & name=names,&
-            & runner=val_runner,&
-            & runner_args=val_runner_args, &
-            & verbose=lget('verbose') )
+            ! cmd_settings=fpm_run_settings(&
+            ! & args=remaining,&
+            ! & profile=val_profile,&
+            ! & prune=.true., &
+            ! & compiler=val_compiler, &
+            ! & c_compiler=c_compiler, &
+            ! & cxx_compiler=cxx_compiler, &
+            ! & archiver=archiver, &
+            ! & flag=val_flag, &
+            ! & cflag=val_cflag, &
+            ! & cxxflag=val_cxxflag, &
+            ! & ldflag=val_ldflag, &
+            ! & example=.true., &
+            ! & list=.true.,&
+            ! & build_tests=.false.,&
+            ! & name=names,&
+            ! & runner=val_runner,&
+            ! & runner_args=val_runner_args, &
+            ! & verbose=.true. )
 
         case('build')
             call set_args(common_args // compiler_args //'&
@@ -611,25 +611,25 @@ contains
             val_runner=sget('runner')
             if(specified('runner') .and. val_runner=='')val_runner='echo'
 
-            cmd_settings=fpm_test_settings(&
-            & args=remaining, &
-            & profile=val_profile, &
-            & prune=.not.lget('no-prune'), &
-            & compiler=val_compiler, &
-            & c_compiler=c_compiler, &
-            & cxx_compiler=cxx_compiler, &
-            & archiver=archiver, &
-            & flag=val_flag, &
-            & cflag=val_cflag, &
-            & cxxflag=val_cxxflag, &
-            & ldflag=val_ldflag, &
-            & example=.false., &
-            & list=lget('list'), &
-            & build_tests=.true., &
-            & name=names, &
-            & runner=val_runner, &
-            & runner_args=val_runner_args, &
-            & verbose=lget('verbose'))
+            ! cmd_settings=fpm_test_settings(&
+            ! & args=remaining, &
+            ! & profile=val_profile, &
+            ! & prune=.not.lget('no-prune'), &
+            ! & compiler=val_compiler, &
+            ! & c_compiler=c_compiler, &
+            ! & cxx_compiler=cxx_compiler, &
+            ! & archiver=archiver, &
+            ! & flag=val_flag, &
+            ! & cflag=val_cflag, &
+            ! & cxxflag=val_cxxflag, &
+            ! & ldflag=val_ldflag, &
+            ! & example=.false., &
+            ! & list=lget('list'), &
+            ! & build_tests=.true., &
+            ! & name=names, &
+            ! & runner=val_runner, &
+            ! & runner_args=val_runner_args, &
+            ! & verbose=lget('verbose'))
 
         case('update')
             call set_args(common_args // ' --fetch-only F --clean F --dump " " ', &
@@ -645,9 +645,9 @@ contains
             if (specified('dump') .and. val_dump=='')val_dump='fpm_dependencies.toml'
 
             allocate(fpm_update_settings :: cmd_settings)
-            cmd_settings=fpm_update_settings(name=names, dump=val_dump, &
-                fetch_only=lget('fetch-only'), verbose=lget('verbose'), &
-                clean=lget('clean'))
+            ! cmd_settings=fpm_update_settings(name=names, dump=val_dump, &
+            !     fetch_only=lget('fetch-only'), verbose=lget('verbose'), &
+            !     clean=lget('clean'))
 
         case('export')
 

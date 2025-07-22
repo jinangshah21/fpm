@@ -4,6 +4,7 @@ module fpm_meta_minpack
     use fpm_error, only: error_t, fatal_error
     use fpm_git, only: git_target_tag
     use fpm_manifest_metapackages, only: metapackage_request_t
+    use fpm_manifest_dependency
 
     implicit none
 

@@ -36,6 +36,7 @@ use fpm_sources, only: get_exe_name_with_suffix
 use fpm_manifest_library, only: library_config_t
 use fpm_manifest_preprocess, only: preprocess_config_t
 use fpm_versioning, only: version_t, new_version
+use fpm_dependency
 implicit none
 
 private

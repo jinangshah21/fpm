@@ -1216,7 +1216,7 @@ function get_package_libraries_link(model, package_name, prefix, exclude_self, d
     r = model%compiler%enumerate_libraries(prefix, package_deps)
     
     ! If requested, export the list of dependency IDs
-    if (present(dep_IDs)) call move_alloc(from=sorted_package_IDs,to=dep_IDs)
+    ! if (present(dep_IDs)) call move_alloc(from=sorted_package_IDs,to=dep_IDs)
     
 end function get_package_libraries_link
 

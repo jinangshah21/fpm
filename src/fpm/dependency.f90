@@ -397,7 +397,7 @@ contains
           do i = 1, self%ndep
             
               ! Save old deps
-              call move_alloc(from=self%dep(i)%package_dep,to=old_package_dep)
+              ! call move_alloc(from=self%dep(i)%package_dep,to=old_package_dep)
               
               call get_required_packages(self, i, error=error)
               if (allocated(error)) return

@@ -164,7 +164,7 @@ module fpm_dependency
     !> Find a dependency in the tree
     generic :: find => find_name
     !> Find a dependency by its name
-    procedure, private :: find_name
+    procedure :: find_name
     !> Establish local link order for a node's package dependencies
     procedure :: local_link_order
     !> Depedendncy resolution finished

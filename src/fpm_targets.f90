@@ -1503,7 +1503,7 @@ subroutine library_targets_to_deps(model, targets, target_ID)
             if (all(target%target_type /= [FPM_TARGET_ARCHIVE, FPM_TARGET_SHARED])) cycle
 
             ! Get the dependency graph index of this package
-            ip = model%deps%find(target%package_name)
+            ip = model%deps%find_name(target%package_name)
             if (ip > 0) target_ID(ip) = it
         ! end associate
     end do

@@ -197,16 +197,16 @@ contains
     ! on MacOS, add two relative paths for search of dynamic library dependencies: 
     add_rpath: if (self%os==OS_MACOS) then  
         
-        exe_path = join_path(self%install_destination(self%bindir) , basename(executable))
+        ! exe_path = join_path(self%install_destination(self%bindir) , basename(executable))
         
         ! First path: for bin/lib/include structure
         cmd = "install_name_tool -add_rpath @executable_path/../lib " // exe_path
-        call self%run(cmd, error)
+        ! call self%run(cmd, error)
         if (allocated(error)) return
 
         ! Second path: same as executable folder
         cmd = "install_name_tool -add_rpath @executable_path " // exe_path
-        call self%run(cmd, error)
+        ! call self%run(cmd, error)
         if (allocated(error)) return
         
     end if add_rpath
@@ -228,7 +228,7 @@ contains
        case (FPM_TARGET_ARCHIVE)
           call self%install(library%output_file, self%libdir, error)
        case (FPM_TARGET_SHARED)
-          call self%install(library%output_file, self%libdir, error)
+          ! call self%install(library%output_file, self%libdir, error)
           
           ! Handle shared library side-files only on Windows
           if (self%os==OS_WINDOWS) then 
@@ -236,11 +236,11 @@ contains
             ! Try both compiler-dependent import library names
             implib_file = join_path(library%output_dir, library%package_name // ".dll.a")           
             if (exists(implib_file)) then 
-                call self%install(implib_file, self%libdir, error)            
+                ! call self%install(implib_file, self%libdir, error)            
                 if (allocated(error)) return
             else
                 implib_file = join_path(library%output_dir, library%package_name // ".lib")
-                if (exists(implib_file)) call self%install(implib_file, self%libdir, error)            
+                ! if (exists(implib_file)) call self%install(implib_file, self%libdir, error)            
                 if (allocated(error)) return
             endif
 

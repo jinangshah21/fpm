@@ -6,6 +6,8 @@ module fpm_meta_stdlib
     use fpm_manifest_metapackages, only: metapackage_request_t
     use fpm_strings, only: string_t
     use iso_fortran_env, only: stdout => output_unit
+    use fpm_manifest_preprocess
+    use fpm_manifest_dependency
 
     implicit none
 

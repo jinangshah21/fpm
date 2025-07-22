@@ -1172,7 +1172,7 @@ function get_package_libraries_link(model, package_name, prefix, exclude_self, d
     type(string_t), allocatable :: package_deps(:)
     
     ! Get dependency ID of this target 
-    id = model%deps%find(package_name)
+    id = model%deps%find_name(package_name)
     if (id<=0) then 
         call fatal_error(error, "Internal error: shared library "//package_name// &
                                 " does not correspond to a package")

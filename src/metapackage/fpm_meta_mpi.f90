@@ -16,6 +16,7 @@ module fpm_meta_mpi
     use fpm_manifest_metapackages, only: metapackage_request_t
     use fpm_pkg_config, only: run_wrapper
     use shlex_module, only: shlex_split => split
+    use fpm_model
 
     implicit none
 

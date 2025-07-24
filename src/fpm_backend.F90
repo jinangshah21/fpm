@@ -70,6 +70,7 @@ subroutine build_package(targets,model,verbose,dry_run)
     type(string_t), allocatable :: build_dirs(:)
     type(string_t) :: temp
     type(error_t), allocatable :: error
+    type(build_target_t), pointer :: target
 
     type(build_progress_t) :: progress
     logical :: plain_output
@@ -77,11 +78,12 @@ subroutine build_package(targets,model,verbose,dry_run)
     ! Need to make output directory for include (mod) files
     allocate(build_dirs(0))
     do i = 1, size(targets)
-       associate(target => targets(i)%ptr)
+        target => targets(i)%ptr
+    !    associate(target => targets(i)%ptr)
           if (target%output_dir .in. build_dirs) cycle
           temp%s = target%output_dir
           build_dirs = [build_dirs, temp]
-       end associate
+    !    end associate
     end do
 
     do i = 1, size(build_dirs)

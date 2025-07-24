@@ -328,7 +328,9 @@ subroutine build_target_list(targets,model,library)
 
     if (n_source < 1) return
 
-    with_lib = any(model%packages%has_library())
+    do i = 1, size(model%packages)
+        with_lib = with_lib .or. model%packages(i)%has_library()
+    end do
     
     if (with_lib .and. present(library)) then 
         shared_lib = library%shared()

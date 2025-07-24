@@ -176,6 +176,7 @@ subroutine add_executable_sources(sources,executables,scope,auto_discover,with_f
     type(string_t), intent(in), optional :: with_f_ext(:)
     !> Error handling
     type(error_t), allocatable, intent(out) :: error
+    class(executable_config_t), pointer :: exe
 
     integer :: i, j
 
@@ -216,7 +217,8 @@ subroutine add_executable_sources(sources,executables,scope,auto_discover,with_f
         end do
 
         ! Add if not already discovered (auto_discovery off)
-        associate(exe => executables(i))
+        exe => executables(i)
+        ! associate(exe => executables(i))
             exe_source = parse_source(join_path(exe%source_dir,exe%main),with_f_ext,error)
             exe_source%exe_name = exe%name
             if (allocated(exe%link)) then
@@ -224,7 +226,7 @@ subroutine add_executable_sources(sources,executables,scope,auto_discover,with_f
             end if
             exe_source%unit_type = FPM_UNIT_PROGRAM
             exe_source%unit_scope = scope
-        end associate
+        ! end associate
 
         if (allocated(error)) return
 

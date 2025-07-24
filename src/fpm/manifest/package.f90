@@ -643,6 +643,12 @@ contains
 
        integer :: ii
        type(toml_table), pointer :: ptr,ptr_pkg
+        type(executable_config_t), pointer :: pkg
+        type(dependency_config_t), pointer :: pkg_d
+        type(example_config_t), pointer :: pkg_e
+        type(test_config_t), pointer :: pkg_t
+        type(profile_config_t), pointer :: pkg_p
+        type(preprocess_config_t), pointer :: pkg_pr
        character(30) :: unnamed
        character(128) :: profile_name
 
@@ -690,8 +696,8 @@ contains
            end if
 
            do ii = 1, size(self%executable)
-
-              associate (pkg => self%executable(ii))
+              pkg => self%executable(ii)
+            !   associate (pkg => self%executable(ii))
 
                  !> Because dependencies are named, fallback if this has no name
                  !> So, serialization will work regardless of size(self%dep) == self%ndep
@@ -705,7 +711,7 @@ contains
                  call pkg%dump_to_toml(ptr, error)
                  if (allocated(error)) return
 
-              end associate
+            !   end associate
 
            end do
        end if
@@ -720,21 +726,22 @@ contains
 
            do ii = 1, size(self%dependency)
 
-              associate (pkg => self%dependency(ii))
+            pkg_d => self%dependency(ii)
+            !   associate (pkg => self%dependency(ii))
 
                  !> Because dependencies are named, fallback if this has no name
                  !> So, serialization will work regardless of size(self%dep) == self%ndep
-                 if (len_trim(pkg%name)==0) then
+                 if (len_trim(pkg_d%name)==0) then
                     write(unnamed,1) 'DEPENDENCY',ii
                     call add_table(ptr_pkg, trim(unnamed), ptr, error, class_name//'(dependencies)')
                  else
-                    call add_table(ptr_pkg, pkg%name, ptr, error, class_name//'(dependencies)')
+                    call add_table(ptr_pkg, pkg_d%name, ptr, error, class_name//'(dependencies)')
                  end if
                  if (allocated(error)) return
-                 call pkg%dump_to_toml(ptr, error)
+                 call pkg_d%dump_to_toml(ptr, error)
                  if (allocated(error)) return
 
-              end associate
+            !   end associate
 
            end do
        end if
@@ -748,22 +755,22 @@ contains
            end if
 
            do ii = 1, size(self%dev_dependency)
-
-              associate (pkg => self%dev_dependency(ii))
+            pkg_d => self%dev_dependency(ii)
+            !   associate ()
 
                  !> Because dependencies are named, fallback if this has no name
                  !> So, serialization will work regardless of size(self%dep) == self%ndep
-                 if (len_trim(pkg%name)==0) then
+                 if (len_trim(pkg_d%name)==0) then
                     write(unnamed,1) 'DEV-DEPENDENCY',ii
                     call add_table(ptr_pkg, trim(unnamed), ptr, error, class_name//'(dev-dependencies)')
                  else
-                    call add_table(ptr_pkg, pkg%name, ptr, error, class_name//'(dev-dependencies)')
+                    call add_table(ptr_pkg, pkg_d%name, ptr, error, class_name//'(dev-dependencies)')
                  end if
                  if (allocated(error)) return
-                 call pkg%dump_to_toml(ptr, error)
+                 call pkg_d%dump_to_toml(ptr, error)
                  if (allocated(error)) return
 
-              end associate
+            !   end associate
 
            end do
        end if
@@ -777,18 +784,18 @@ contains
            end if
 
            do ii = 1, size(self%profiles)
-
-              associate (pkg => self%profiles(ii))
+            pkg_p => self%profiles(ii)
+            !   associate ()
 
                  !> Duplicate profile names are possible, as multiple profiles are possible with the
                  !> same name, same compiler, etc. So, use a unique name here
                  write(profile_name,2) ii
                  call add_table(ptr_pkg, trim(profile_name), ptr, error, class_name//'(profiles)')
                  if (allocated(error)) return
-                 call pkg%dump_to_toml(ptr, error)
+                 call pkg_p%dump_to_toml(ptr, error)
                  if (allocated(error)) return
 
-              end associate
+            !   end associate
 
            end do
        end if
@@ -802,22 +809,22 @@ contains
            end if
 
            do ii = 1, size(self%example)
-
-              associate (pkg => self%example(ii))
+            pkg_e => self%example(ii)
+            !   associate (pkg => self%example(ii))
 
                  !> Because dependencies are named, fallback if this has no name
                  !> So, serialization will work regardless of size(self%dep) == self%ndep
-                 if (len_trim(pkg%name)==0) then
+                 if (len_trim(pkg_e%name)==0) then
                     write(unnamed,1) 'EXAMPLE',ii
                     call add_table(ptr_pkg, trim(unnamed), ptr, error, class_name//'(example)')
                  else
-                    call add_table(ptr_pkg, pkg%name, ptr, error, class_name//'(example)')
+                    call add_table(ptr_pkg, pkg_e%name, ptr, error, class_name//'(example)')
                  end if
                  if (allocated(error)) return
-                 call pkg%dump_to_toml(ptr, error)
+                 call pkg_e%dump_to_toml(ptr, error)
                  if (allocated(error)) return
 
-              end associate
+            !   end associate
 
            end do
        end if
@@ -831,22 +838,22 @@ contains
            end if
 
            do ii = 1, size(self%test)
-
-              associate (pkg => self%test(ii))
+                pkg_t => self%test(ii)
+            !   associate (pkg => self%test(ii))
 
                  !> Because dependencies are named, fallback if this has no name
                  !> So, serialization will work regardless of size(self%dep) == self%ndep
-                 if (len_trim(pkg%name)==0) then
+                 if (len_trim(pkg_t%name)==0) then
                     write(unnamed,1) 'TEST',ii
                     call add_table(ptr_pkg, trim(unnamed), ptr, error, class_name//'(test)')
                  else
-                    call add_table(ptr_pkg, pkg%name, ptr, error, class_name//'(test)')
+                    call add_table(ptr_pkg, pkg_t%name, ptr, error, class_name//'(test)')
                  end if
                  if (allocated(error)) return
-                 call pkg%dump_to_toml(ptr, error)
+                 call pkg_t%dump_to_toml(ptr, error)
                  if (allocated(error)) return
 
-              end associate
+            !   end associate
 
            end do
        end if
@@ -860,22 +867,22 @@ contains
            end if
 
            do ii = 1, size(self%preprocess)
-
-              associate (pkg => self%preprocess(ii))
+            pkg_pr => self%preprocess(ii)
+            !   associate (pkg => self%preprocess(ii))
 
                  !> Because dependencies are named, fallback if this has no name
                  !> So, serialization will work regardless of size(self%dep) == self%ndep
-                 if (len_trim(pkg%name)==0) then
+                 if (len_trim(pkg_pr%name)==0) then
                     write(unnamed,1) 'PREPROCESS',ii
                     call add_table(ptr_pkg, trim(unnamed), ptr, error, class_name//'(preprocess)')
                  else
-                    call add_table(ptr_pkg, pkg%name, ptr, error, class_name//'(preprocess)')
+                    call add_table(ptr_pkg, pkg_pr%name, ptr, error, class_name//'(preprocess)')
                  end if
                  if (allocated(error)) return
-                 call pkg%dump_to_toml(ptr, error)
+                 call pkg_pr%dump_to_toml(ptr, error)
                  if (allocated(error)) return
 
-              end associate
+            !   end associate
 
            end do
        end if

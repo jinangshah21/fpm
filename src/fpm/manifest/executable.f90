@@ -250,6 +250,7 @@ contains
         !> Local variables
         integer :: ierr, ii
         type(toml_table), pointer :: ptr_deps,ptr
+        type(dependency_config_t), pointer :: dep
         character(27) :: unnamed
 
         call set_string(table, "name", self%name, error)
@@ -269,8 +270,9 @@ contains
            end if
 
            do ii = 1, size(self%dependency)
-              associate (dep => self%dependency(ii))
+            !   associate (dep => self%dependency(ii))
 
+                dep => self%dependency(ii)
                  !> Because dependencies are named, fallback if this has no name
                  !> So, serialization will work regardless of size(self%dep) == self%ndep
                  if (len_trim(dep%name)==0) then
@@ -285,7 +287,7 @@ contains
                  end if
                  call dep%dump_to_toml(ptr, error)
                  if (allocated(error)) return
-              end associate
+            !   end associate
            end do
 
         endif

@@ -13,7 +13,7 @@ module fpm_backend_output
 use iso_fortran_env, only: stdout=>output_unit
 use fpm_error, only: error_t
 use fpm_filesystem, only: basename,join_path
-use fpm_targets, only: build_target_ptr
+use fpm_targets, only: build_target_ptr, build_target_t
 use fpm_backend_console, only: console_t, LINE_RESET, COLOR_RED, COLOR_GREEN, COLOR_YELLOW, COLOR_RESET
 use fpm_compile_commands, only: compile_command_t, compile_command_table_t
 implicit none
@@ -85,8 +85,10 @@ contains
         character(:), allocatable :: target_name
         character(100) :: output_string
         character(7) :: overall_progress
+        type(build_target_t), pointer :: target
 
-        associate(target=>progress%target_queue(queue_index)%ptr)
+        target => progress%target_queue(queue_index)%ptr
+        ! associate(target=>progress%target_queue(queue_index)%ptr)
 
             if (allocated(target%source)) then
                 target_name = basename(target%source%file_name)
@@ -112,7 +114,7 @@ contains
 
             end if
 
-        end associate
+        ! end associate
 
     end subroutine output_status_compiling
 
@@ -128,12 +130,14 @@ contains
         character(:), allocatable :: target_name
         character(100) :: output_string
         character(7) :: overall_progress
+        type(build_target_t), pointer :: target
 
         !$omp critical 
         progress%n_complete = progress%n_complete + 1
         !$omp end critical
 
-        associate(target=>progress%target_queue(queue_index)%ptr)
+        target => progress%target_queue(queue_index)%ptr
+        ! associate(target=>progress%target_queue(queue_index)%ptr)
 
             if (allocated(target%source)) then
                 target_name = basename(target%source%file_name)
@@ -163,7 +167,7 @@ contains
 
             end if
 
-        end associate
+        ! end associate
 
     end subroutine output_status_complete
 

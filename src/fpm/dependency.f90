@@ -587,6 +587,7 @@ contains
 
     integer :: id
     character(len=:), allocatable :: proj_dir, root
+    type(dependency_node_t), pointer :: dep
 
     id = self%find(name)
     root = "."
@@ -595,8 +596,8 @@ contains
       call fatal_error(error, "Cannot update dependency '"//name//"'")
       return
     end if
-
-    associate (dep => self%dep(id))
+dep => self%dep(id)
+    ! associate (dep => self%dep(id))
       if (allocated(dep%git) .and. dep%update) then
         if (self%verbosity > 0) write (self%unit, out_fmt) "Update:", dep%name
         proj_dir = join_path(self%dep_dir, dep%name)
@@ -614,7 +615,7 @@ contains
         end do
         if (allocated(error)) return
       end if
-    end associate
+    ! end associate
 
   end subroutine update_dependency
 
@@ -1095,8 +1096,10 @@ contains
       type(dependency_config_t), allocatable :: dependency(:)
       type(package_config_t) :: manifest
       logical :: required(tree%ndep),main
-      
-      associate(node => tree%dep(node_ID))
+      type(dependency_node_t), pointer :: node
+
+      node => tree%dep(node_ID)
+      ! associate(node => tree%dep(node_ID))
         
       ! Is the main project
       main = node_ID==1  
@@ -1137,7 +1140,7 @@ contains
          node%package_dep(k) = string_t(tree%dep(id)%name)
       end do
       
-      endassociate
+      ! endassociate
       
       contains
                 
@@ -1299,6 +1302,7 @@ contains
     character(len=:), allocatable :: version, url, obj, rev, proj_dir
     type(toml_key), allocatable :: list(:)
     type(toml_table), pointer :: ptr
+    type(dependency_node_t), pointer :: dep
 
     call table%get_keys(list)
 
@@ -1318,7 +1322,8 @@ contains
       call get_value(ptr, "rev", rev)
       if (.not. allocated(proj_dir)) cycle
       self%ndep = self%ndep + 1
-      associate (dep => self%dep(self%ndep))
+      dep => self%dep(self%ndep)
+      ! associate (dep => self%dep(self%ndep))
         dep%name = list(ii)%key
         if (is_unix) then
           dep%proj_dir = proj_dir
@@ -1343,7 +1348,7 @@ contains
         else
           dep%path = proj_dir
         end if
-      end associate
+      ! end associate
     end do
     if (allocated(error)) return
 
@@ -1398,9 +1403,11 @@ contains
     integer :: ii
     type(toml_table), pointer :: ptr
     character(len=:), allocatable :: proj_dir
+    type(dependency_node_t), pointer :: dep
 
     do ii = 1, self%ndep
-      associate (dep => self%dep(ii))
+    dep => self%dep(ii)
+      ! associate (dep => self%dep(ii))
         call add_table(table, dep%name, ptr)
         if (.not. associated(ptr)) then
           call fatal_error(error, "Cannot create entry for "//dep%name)
@@ -1420,7 +1427,7 @@ contains
             call set_value(ptr, "rev", dep%revision)
           end if
         end if
-      end associate
+      ! end associate
     end do
     if (allocated(error)) return
 
@@ -1734,6 +1741,7 @@ contains
         integer :: ierr, ii
         type(toml_table), pointer :: ptr_deps,ptr
         character(27) :: unnamed
+        type(dependency_node_t), pointer :: dep
 
         call set_value(table, "unit", self%unit, error, 'dependency_tree_t')
         if (allocated(error)) return
@@ -1756,7 +1764,8 @@ contains
            end if
 
            do ii = 1, size(self%dep)
-              associate (dep => self%dep(ii))
+           dep => self%dep(ii)
+              ! associate (dep => self%dep(ii))
 
                  !> Because dependencies are named, fallback if this has no name
                  !> So, serialization will work regardless of size(self%dep) == self%ndep
@@ -1775,7 +1784,7 @@ contains
                  end if
                  call dep%dump_to_toml(ptr, error)
                  if (allocated(error)) return
-              end associate
+              ! end associate
            end do
 
         endif

@@ -972,6 +972,7 @@ subroutine model_dump_to_toml(self, table, error)
 
     integer :: ierr, ii
     type(toml_table), pointer :: ptr,ptr_pkg
+    type(package_t), pointer :: pkg
     character(27) :: unnamed
 
     call set_string(table, "package-name", self%package_name, error, 'fpm_model_t')
@@ -1028,7 +1029,8 @@ subroutine model_dump_to_toml(self, table, error)
 
            do ii = 1, size(self%packages)
 
-              associate (pkg => self%packages(ii))
+            pkg => self%packages(ii)
+            !   associate (pkg => self%packages(ii))
 
                  !> Because dependencies are named, fallback if this has no name
                  !> So, serialization will work regardless of size(self%dep) == self%ndep
@@ -1042,7 +1044,7 @@ subroutine model_dump_to_toml(self, table, error)
                  call pkg%dump_to_toml(ptr, error)
                  if (allocated(error)) return
 
-              end associate
+            !   end associate
 
            end do
     end if

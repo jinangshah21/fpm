@@ -6,7 +6,7 @@ use fpm_backend, only: build_package
 use fpm_command_line, only: fpm_build_settings, fpm_new_settings, &
                       fpm_run_settings, fpm_install_settings, fpm_test_settings, &
                       fpm_clean_settings
-use fpm_dependency, only : new_dependency_tree
+use fpm_dependency, only : new_dependency_tree, dependency_node_t
 use fpm_filesystem, only: is_dir, join_path, list_files, exists, &
                    basename, filewrite, mkdir, run, os_delete_dir
 use fpm_model, only: fpm_model_t, srcfile_t, show_model, fortran_features_t, &
@@ -50,6 +50,9 @@ subroutine build_model(model, settings, package, error)
     logical :: has_cpp
     logical :: duplicates_found
     type(string_t) :: include_dir
+    type(fortran_features_t), pointer :: features
+    type(dependency_node_t), pointer :: dep
+
 
     model%package_name = package%name
 
@@ -99,7 +102,8 @@ subroutine build_model(model, settings, package, error)
     has_cpp = .false.
 
     do i = 1, model%deps%ndep
-        associate(dep => model%deps%dep(i))
+    dep => model%deps%dep(i)
+        ! associate(dep => model%deps%dep(i))
             file_name = join_path(dep%proj_dir, "fpm.toml")
 
             ! The main package manifest should not be reloaded, because it may have been 
@@ -115,11 +119,12 @@ subroutine build_model(model, settings, package, error)
             end if            
             
             model%packages(i)%name = manifest%name
-            associate(features => model%packages(i)%features)
+            features => model%packages(i)%features
+            ! associate(features => model%packages(i)%features)
                 features%implicit_typing   = manifest%fortran%implicit_typing
                 features%implicit_external = manifest%fortran%implicit_external
                 features%source_form       = manifest%fortran%source_form
-            end associate
+            ! end associate
             model%packages(i)%version = manifest%version
 
             !> Add this dependency's manifest macros
@@ -174,7 +179,7 @@ subroutine build_model(model, settings, package, error)
             model%packages(i)%enforce_module_names = manifest%build%module_naming
             model%packages(i)%module_prefix        = manifest%build%module_prefix
 
-        end associate
+        ! end associate
     end do
     if (allocated(error)) return
 
@@ -774,10 +779,11 @@ logical function should_be_run(settings,run_scope,exe_target)
     class(fpm_run_settings), intent(in) :: settings
     integer, intent(in) :: run_scope
     type(build_target_t), intent(in) :: exe_target
+    type(srcfile_t), pointer :: exe_source
     
     if (exe_target%is_executable_target(run_scope)) then
-        
-        associate(exe_source => exe_target%dependencies(1)%ptr%source)
+        exe_source => exe_target%dependencies(1)%ptr%source
+        ! associate(exe_source => exe_target%dependencies(1)%ptr%source)
             
             if (exe_source%unit_scope/=run_scope) then 
                 
@@ -796,7 +802,7 @@ logical function should_be_run(settings,run_scope,exe_target)
                 
             end if            
             
-        end associate
+        ! end associate
                         
     else
         

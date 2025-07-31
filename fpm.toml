@@ -15,11 +15,11 @@ macros=["FPM_RELEASE_VERSION={version}"]
 toml-f.git = "https://github.com/jinangshah21/toml-f.git"
 toml-f.rev = "38c294fc5d9cb5fa6a9d3569514da28b8705f3fb"
 M_CLI2.git = "https://github.com/jinangshah21/M_CLI2.git"
-M_CLI2.rev = "c34cfdde5e1f82918668c5d06c3faa315489b1c0"
+M_CLI2.rev = "92bbbc3b2c455543fddb4104043a513d9d359fbe"
 fortran-regex.git  = "https://github.com/perazz/fortran-regex"
 fortran-regex.tag  = "1.1.2"
 jonquil.git = "https://github.com/jinangshah21/jonquil.git"
-jonquil.rev = "c5a272475772526343cf1d6864411b233c7d7c05"
+jonquil.rev = "108494ec479395e490d6304ee8542eeb0fb04afa"
 fortran-shlex.git = "https://github.com/jinangshah21/fortran-shlex"
 fortran-shlex.rev = "a030f1b9754ac3e6c5aa17fed01e5c2d767b947b"
 

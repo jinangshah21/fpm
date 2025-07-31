@@ -50,7 +50,7 @@ else
     pwd_working = pwd_start
 end if
 
-select type (settings => cmd_settings)
+select type (cmd_settings)
 type is (fpm_new_settings)
 class default
     if (.not.has_manifest(pwd_working)) then
@@ -69,25 +69,25 @@ class default
     end if
 end select
 
-select type(settings=>cmd_settings)
+select type(cmd_settings)
 type is (fpm_new_settings)
-    call cmd_new(settings)
+    call cmd_new(cmd_settings)
 type is (fpm_build_settings)
-    call cmd_build(settings)
+    call cmd_build(cmd_settings)
 type is (fpm_run_settings)
-    call cmd_run(settings,test=.false.)
+    call cmd_run(cmd_settings,test=.false.)
 type is (fpm_test_settings)
-    call cmd_run(settings,test=.true.)
+    call cmd_run(cmd_settings,test=.true.)
 type is (fpm_export_settings)
-    call cmd_export(settings)
+    call cmd_export(cmd_settings)
 type is (fpm_install_settings)
-    call cmd_install(settings)
+    call cmd_install(cmd_settings)
 type is (fpm_update_settings)
-    call cmd_update(settings)
+    call cmd_update(cmd_settings)
 type is (fpm_clean_settings)
-    call cmd_clean(settings)
+    call cmd_clean(cmd_settings)
 type is (fpm_publish_settings)
-    call cmd_publish(settings)
+    call cmd_publish(cmd_settings)
 end select
 
 if (allocated(project_root)) then

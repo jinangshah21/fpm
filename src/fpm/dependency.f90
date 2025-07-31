@@ -1213,32 +1213,32 @@ dep => self%dep(id)
         type(error_t), allocatable, intent(out) :: error
         integer :: k, id
 
-        if (.not.(i>0 .and. i<=tree%ndep)) then 
-            call fatal_error(error,'package graph failed: invalid dependency ID')
-            return
-        end if
-        if (visited(i)) return
+        ! if (i<=tree%ndep) then 
+        !     call fatal_error(error,'package graph failed: invalid dependency ID')
+        !     return
+        ! end if
+        ! if (visited(i)) return
         
-        visited(i) = .true.
+        ! visited(i) = .true.
 
         ! Visit all required dependencies before this node
-        if (allocated(tree%dep(i)%package_dep)) then
-            do k = 1, size(tree%dep(i)%package_dep)
-                id = tree%find(tree%dep(i)%package_dep(k)%s)
+        ! if (allocated(tree%dep(i)%package_dep)) then
+            ! do k = 1, size(tree%dep(i)%package_dep)
+            !     id = tree%find(tree%dep(i)%package_dep(k)%s)
                 
-                if (.not.(id>0 .and. id<=tree%ndep)) then 
-                    call fatal_error(error,'package graph failed: cannot find '//tree%dep(i)%package_dep(k)%s)
-                    return
-                end if
+            !     if (.not.(id>0 .and. id<=tree%ndep)) then 
+            !         call fatal_error(error,'package graph failed: cannot find '//tree%dep(i)%package_dep(k)%s)
+            !         return
+            !     end if
 
-                call dfs(id, visited, stack, top, error)
-                if (allocated(error)) return
-            end do
-        end if
+            !     call dfs(id, visited, stack, top, error)
+            !     if (allocated(error)) return
+            ! end do
+        ! end if
 
-        ! Now that all dependencies are handled, record this node
-        top = top + 1
-        stack(top) = i
+        ! ! Now that all dependencies are handled, record this node
+        ! top = top + 1
+        ! stack(top) = i
     end subroutine dfs
 
   end subroutine local_link_order

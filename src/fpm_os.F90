@@ -112,10 +112,13 @@ contains
         character(kind=c_char), intent(out) :: lhs(*)
         character(len=*), intent(in) :: rhs
         integer, intent(in) :: len
-        integer :: length
+        integer :: length, i
         length = min(len - 1, len_trim(rhs))
 
-        lhs(1:length) = transfer(rhs(1:length), lhs(1:length))
+        ! lhs(1:length) = transfer(rhs(1:length), lhs(1:length))
+        do i = 1, length
+            lhs(i) = rhs(i:i)
+        end do
         lhs(length + 1:length + 1) = c_null_char
 
     end subroutine f_c_character
@@ -124,7 +127,7 @@ contains
         character(kind=c_char), intent(in) :: rhs(*)
         character(len=:), allocatable, intent(out) :: lhs
 
-        integer :: ii
+        integer :: ii, i
 
         do ii = 1, huge(ii) - 1
             if (rhs(ii) == c_null_char) then
@@ -133,7 +136,9 @@ contains
         end do
 
         allocate (character(len=ii - 1) :: lhs)
-        lhs = transfer(rhs(1:ii - 1), lhs)
+        do i = 1, ii-1
+            lhs(i:i) = rhs(i)
+        end do
 
     end subroutine c_f_character
 

@@ -505,7 +505,7 @@ subroutine build_target_list(targets,model,library)
             i = index(object_file,filesep)
         end do
 
-        object_file = join_path(model%package_name,object_file)//'.o'
+        ! object_file = join_path(model%package_name,object_file)//'.o'
 
     end function get_object_name
 

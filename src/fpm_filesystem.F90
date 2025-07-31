@@ -417,12 +417,12 @@ recursive subroutine list_files(dir, files, recurse)
     type(string_t) :: files_tmp(N_MAX)
     integer(kind=c_int) :: r
 
-    if (c_is_dir(dir(1:len_trim(dir))//c_null_char) == 0) then
-        allocate (files(0))
-        return
-    end if
+    ! if (c_is_dir(dir(1:len_trim(dir))//c_null_char) == 0) then
+    !     allocate (files(0))
+    !     return
+    ! end if
 
-    dir_handle = c_opendir(dir(1:len_trim(dir))//c_null_char)
+    ! dir_handle = c_opendir(dir(1:len_trim(dir))//c_null_char)
     if (.not. c_associated(dir_handle)) then
         print *, 'c_opendir() failed'
         error stop
@@ -470,10 +470,10 @@ recursive subroutine list_files(dir, files, recurse)
             allocate(sub_dir_files(0))
 
             do i=1,size(files)
-                if (c_is_dir(files(i)%s//c_null_char) /= 0) then
-                    call list_files(files(i)%s, dir_files, recurse=.true.)
-                    sub_dir_files = [sub_dir_files, dir_files]
-                end if
+                ! if (c_is_dir(files(i)%s//c_null_char) /= 0) then
+                !     call list_files(files(i)%s, dir_files, recurse=.true.)
+                !     sub_dir_files = [sub_dir_files, dir_files]
+                ! end if
             end do
 
             files = [files, sub_dir_files]

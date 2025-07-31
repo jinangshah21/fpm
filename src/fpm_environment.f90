@@ -420,7 +420,7 @@ logical function set_env(name,value,overwrite)
    
    !> Call setenv
 #ifndef FPM_BOOTSTRAP   
-   cerr = c_setenv(c_name,c_value,cover)
+!    cerr = c_setenv(c_name,c_value,cover)
 #endif
    set_env = cerr==0_c_int
    
@@ -451,7 +451,7 @@ logical function delete_env(name) result(success)
    
    !> Call setenv
 #ifndef FPM_BOOTSTRAP   
-   cerr = c_unsetenv(c_name)
+!    cerr = c_unsetenv(c_name)
 #endif
    success = cerr==0_c_int
    

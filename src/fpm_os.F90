@@ -83,7 +83,7 @@ contains
         allocate (cpath(len(path) + 1))
         call f_c_character(path, cpath, len(path) + 1)
 
-        stat = chdir_(cpath)
+        ! stat = chdir_(cpath)
 
         if (stat /= 0) then
             call fatal_error(error, "Failed to change directory to '"//path//"'")
@@ -99,7 +99,7 @@ contains
 
         allocate (cpath(buffersize))
 
-        tmp = getcwd_(cpath, buffersize)
+        ! tmp = getcwd_(cpath, buffersize)
         if (c_associated(tmp)) then
             call c_f_character(cpath, path)
         else
@@ -167,7 +167,7 @@ contains
         allocate (cpath(buffersize))
 
 #ifndef FPM_BOOTSTRAP
-        ptr = c_realpath(appended_path, cpath, buffersize)
+        ! ptr = c_realpath(appended_path, cpath, buffersize)
 #endif
 
         if (c_associated(ptr)) then

@@ -260,6 +260,7 @@ contains
 
     !> Instance of the dependency configuration
     class(dependency_node_t), intent(in) :: self
+    type(dependency_config_t) :: tmp_dep
 
     !> Unit for IO
     integer, intent(in) :: unit
@@ -277,7 +278,9 @@ contains
     end if
 
     !> Call base object info
-    call self%dependency_config_t%info(unit, pr)
+    tmp_dep = self%dependency_config_t
+    call tmp_dep%info(unit, pr)
+    self%dependency_config_t = tmp_dep
 
     if (allocated(self%version)) then
       write (unit, fmt) "- version", self%version%s()
@@ -347,7 +350,7 @@ contains
       ! Skip root node
       do id = 2, cached%ndep
         cached%dep(id)%cached = .true.
-        call self%add(cached%dep(id), error)
+        ! call self%add_dependency_node(cached%dep(id), error)
         if (allocated(error)) return
       end do
     end if
@@ -1536,6 +1539,7 @@ dep => self%dep(id)
   logical function dependency_node_is_same(this,that)
       class(dependency_node_t), intent(in) :: this
       class(serializable_t), intent(in) :: that
+      type(dependency_config_t) :: a, b
 
       dependency_node_is_same = .false.
 
@@ -1543,7 +1547,7 @@ dep => self%dep(id)
          type is (dependency_node_t)
 
             ! Base class must match
-            if (.not.(this%dependency_config_t==other%dependency_config_t)) return
+            ! if (.not.(this%dependency_config_t==other%dependency_config_t)) return
 
             ! Extension must match
             if (.not.(this%done  .eqv.other%done)) return
@@ -1585,6 +1589,7 @@ dep => self%dep(id)
 
         !> Instance of the serializable object
         class(dependency_node_t), intent(inout) :: self
+        type(dependency_config_t) :: tmp_dep
 
         !> Data structure
         type(toml_table), intent(inout) :: table
@@ -1596,7 +1601,10 @@ dep => self%dep(id)
         type(toml_array), pointer :: array
 
         ! Dump parent class
-        call self%dependency_config_t%dump_to_toml(table, error)
+        tmp_dep = self%dependency_config_t
+        call tmp_dep%dump_to_toml(table, error)
+        self%dependency_config_t = tmp_dep
+        ! call self%dependency_config_t%dump_to_toml(table, error)
         if (allocated(error)) return
 
         if (allocated(self%version)) then
@@ -1634,11 +1642,15 @@ dep => self%dep(id)
         character(len=:), allocatable :: version
         integer :: ierr,i,n
         type(toml_array), pointer :: array
+        type(dependency_config_t) :: tmp_dep
 
         call destroy_dependency_node(self)
 
         ! Load parent class
-        call self%dependency_config_t%load_from_toml(table, error)
+        tmp_dep = self%dependency_config_t
+        call tmp_dep%load_from_toml(table, error)
+        self%dependency_config_t = tmp_dep
+        ! call self%dependency_config_t%load_from_toml(table, error)
         if (allocated(error)) return
 
         call get_value(table, "done", self%done, error, 'dependency_node_t')

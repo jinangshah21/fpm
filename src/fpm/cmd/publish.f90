@@ -3,7 +3,7 @@
 !> To upload a package you need to provide a token that will be linked to your username and created for a namespace.
 !> The token can be obtained from the registry website. It can be used as `fpm publish --token <token>`.
 module fpm_cmd_publish
-  use fpm_command_line, only: fpm_publish_settings
+  use fpm_command_line, only: fpm_publish_settings, fpm_build_settings
   use fpm_manifest, only: package_config_t, get_package_data
   use fpm_model, only: fpm_model_t
   use fpm_error, only: error_t, fpm_stop
@@ -33,6 +33,7 @@ contains
     type(string_t), allocatable :: upload_data(:)
     character(len=:), allocatable :: tmp_file
     type(downloader_t) :: downloader
+    type(fpm_build_settings) :: tmp_build
     integer :: i
 
     ! Get package data to determine package version.
@@ -53,7 +54,9 @@ contains
     if (.not. exists('fpm.toml')) call fpm_stop(1, "Cannot find 'fpm.toml' file. Are you in the project root?")
 
     ! Build model to obtain dependency tree.
-    call build_model(model, settings%fpm_build_settings, package, error)
+    tmp_build = settings%fpm_build_settings
+    call build_model(model, tmp_build, package, error)
+    ! call build_model(model, settings%fpm_build_settings, package, error)
     if (allocated(error)) call fpm_stop(1, '*cmd_build* Model error: '//error%message)
 
     ! Check if package contains git dependencies. Only publish packages without git dependencies.

@@ -1,5 +1,5 @@
 module fpm_cmd_export
-  use fpm_command_line, only : fpm_export_settings
+  use fpm_command_line, only : fpm_export_settings, fpm_build_settings
   use fpm_dependency, only : dependency_tree_t, new_dependency_tree
   use fpm_error, only : error_t, fpm_stop
   use fpm_filesystem, only : join_path
@@ -21,6 +21,7 @@ contains
     type(dependency_tree_t) :: deps
     type(fpm_model_t) :: model
     type(error_t), allocatable :: error
+    type(fpm_build_settings) :: tmp_build
 
     character(len=:), allocatable :: filename
 
@@ -57,8 +58,10 @@ contains
 
     !> Export full model
     if (len_trim(settings%dump_model)>0) then
+        tmp_build = settings%fpm_build_settings
+        call build_model(model, tmp_build, package, error)
+        ! call build_model(model, settings%fpm_build_settings, package, error)
 
-        call build_model(model, settings%fpm_build_settings, package, error)
         if (allocated(error)) then
             call fpm_stop(1,'*cmd_export* Model error: '//error%message)
         end if

@@ -347,7 +347,7 @@ contains
       ! Skip root node
       do id = 2, cached%ndep
         cached%dep(id)%cached = .true.
-        call self%add(cached%dep(id), error)
+        ! call self%add(cached%dep(id), error)
         if (allocated(error)) return
       end do
     end if

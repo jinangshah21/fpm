@@ -369,11 +369,11 @@ contains
         call cmd%test_serialization('compile_command: empty', error)
         if (allocated(error)) return
         
-        cmd = compile_command_t(directory = string_t("/test/dir"), &
-                                arguments = [string_t("gfortran"), &
-                                             string_t("-c"), string_t("main.f90"), &
-                                             string_t("-o"), string_t("main.o")], &
-                                file = string_t("main.f90"))
+        cmd%directory = string_t("/test/dir")
+        cmd%arguments = [string_t("gfortran"), &
+                        string_t("-c"), string_t("main.f90"), &
+                        string_t("-o"), string_t("main.o")]
+        cmd%file = string_t("main.f90")
         
         call cmd%test_serialization('compile_command: non-empty', error)
         if (allocated(error)) return       
@@ -398,11 +398,11 @@ contains
         type(compile_command_t) :: cmd
         integer :: i
 
-        cmd = compile_command_t(directory = string_t("/src"), &
-                                arguments = [string_t("gfortran"), &
-                                             string_t("-c"), string_t("example.f90"), &
-                                             string_t("-o"), string_t("example.o")], &
-                                file = string_t("example.f90"))
+        cmd%directory = string_t("/src")
+        cmd%arguments = [string_t("gfortran"), &
+                        string_t("-c"), string_t("example.f90"), &
+                        string_t("-o"), string_t("example.o")]
+        cmd%file = string_t("example.f90")
 
         call table%register(cmd, error)
         if (allocated(error)) return

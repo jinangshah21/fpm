@@ -70,7 +70,7 @@ character(len=:),allocatable  :: rm_command
       if( is_dir(trim(directories(i))) ) then
          write(*,*)'ERROR:',trim( directories(i) ),' already exists'
          write(*,*)'        you must remove scratch directories before performing this test'
-         do i = 1, size(directories)
+         do j = 1, size(directories)
             write(*,'(*(g0:,1x))')'directories:',trim(directories(j)),'name-with-hyphens'
          end do
          stop

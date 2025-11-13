@@ -70,7 +70,9 @@ character(len=:),allocatable  :: rm_command
       if( is_dir(trim(directories(i))) ) then
          write(*,*)'ERROR:',trim( directories(i) ),' already exists'
          write(*,*)'        you must remove scratch directories before performing this test'
-         write(*,'(*(g0:,1x))')'directories:',(trim(directories(j)),j=1,size(directories)),'name-with-hyphens'
+         do i = 1, size(directories)
+            write(*,'(*(g0:,1x))')'directories:',trim(directories(j)),'name-with-hyphens'
+         end do
          stop
       endif
    enddo
@@ -128,8 +130,12 @@ character(len=:),allocatable  :: rm_command
 
          if(size(expected)/=size(file_names))then
             write(*,*)'WARNING: unexpected number of files in file list=',size(file_names),' expected ',size(expected)
-            write(*,'("EXPECTED: ",*(g0:,","))')(scr//trim(expected(j)),j=1,size(expected))
-            write(*,'("FOUND:    ",*(g0:,","))')(trim(file_names(j)%s),j=1,size(file_names))
+            do j = 1, size(expected)
+               write(*,'("EXPECTED: ",*(g0:,","))')(scr//trim(expected(j)))
+            end do
+            do j = 1, size(file_names)
+               write(*,'("FOUND:    ",*(g0:,","))') trim(file_names(j)%s)
+            end do
          endif
 
          do j=1,size(expected)
@@ -138,7 +144,9 @@ character(len=:),allocatable  :: rm_command
             if(is_os_windows) expected(j)=windows_path(expected(j))
             if( .not.(trim(expected(j)).in.file_names) )then
                 tally=[tally,.false.]
-                write(*,'("ERROR: FOUND ",*(g0:,", "))')( trim(file_names(k)%s), k=1,size(file_names) )
+                do k = 1, size(file_names)
+                  write(*,'("ERROR: FOUND ",*(g0:,", "))') trim(file_names(k)%s)
+                end do
                 write(*,'(*(g0))')'       BUT NO MATCH FOR ',expected(j)
                 tally=[tally,.false.]
                 cycle TESTS

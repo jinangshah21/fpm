@@ -37,7 +37,7 @@ module fpm_versioning
         procedure, private :: less_equals
 
         !> Compare a version against a version constraint (x.x.0 <= v < x.x.HUGE)
-        generic :: operator(.match.) => match
+        generic :: mat => match
         procedure, private :: match
 
         !> Create a printable string from a version data type

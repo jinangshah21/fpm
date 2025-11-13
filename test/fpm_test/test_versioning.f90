@@ -381,12 +381,12 @@ contains
         call new_version(v1, [1, 1, 0])
         call new_version(v2, [1])
 
-        if (.not. (v1 .match. v2)) then
+        if (.not. (v1%mat(v2))) then
            call test_failed(error, "Version comparison failed (match)")
            return
         end if
 
-        if (v2 .match. v1) then
+        if (v2%mat(v1)) then
            call test_failed(error, "Version comparison failed (match)")
            return
         end if
@@ -394,12 +394,12 @@ contains
         call new_version(v1, [0, 5, 8])
         call new_version(v2, [0, 5])
 
-        if (.not. (v1 .match. v2)) then
+        if (.not. (v1%mat(v2))) then
            call test_failed(error, "Version comparison failed (match)")
            return
         end if
 
-        if (v2 .match. v1) then
+        if (v2%mat(v1)) then
            call test_failed(error, "Version comparison failed (match)")
            return
         end if
@@ -407,12 +407,12 @@ contains
         call new_version(v1, [1, 2])
         call new_version(v2, [1, 2, 0])
 
-        if (.not. (v1 .match. v2)) then
+        if (.not. (v1%mat(v2))) then
            call test_failed(error, "Version comparison failed (match)")
            return
         end if
 
-        if (.not. (v2 .match. v1)) then
+        if (.not. (v2%mat(v1))) then
            call test_failed(error, "Version comparison failed (match)")
            return
         end if

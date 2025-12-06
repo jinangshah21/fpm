@@ -541,6 +541,7 @@ subroutine srcfile_dump_to_toml(self, table, error)
 
     !> Error handling
     type(error_t), allocatable, intent(out) :: error
+    type(string_t), allocatable :: tmp_link(:)
 
     integer :: ierr
 
@@ -557,15 +558,40 @@ subroutine srcfile_dump_to_toml(self, table, error)
     if (allocated(error)) return
     call set_string(table,"unit-type",FPM_UNIT_NAME(self%unit_type), error, 'srcfile_t')
     if (allocated(error)) return
-    call set_list(table, "modules-provided",self%modules_provided, error)
+    if (allocated(self%modules_provided)) then
+        call set_list(table, "modules-provided",self%modules_provided, error)
+    else 
+        call set_list(table, "modules-provided",tmp_link, error)
+    end if
+    ! call set_list(table, "modules-provided",self%modules_provided, error)
     if (allocated(error)) return
-    call set_list(table, "parent-modules",self%parent_modules, error)
+    if (allocated(self%parent_modules)) then
+        call set_list(table, "parent-modules",self%parent_modules, error)
+    else 
+        call set_list(table, "parent-modules",tmp_link, error)
+    end if
+    ! call set_list(table, "parent-modules",self%parent_modules, error)
     if (allocated(error)) return
-    call set_list(table, "modules-used",self%modules_used, error)
+    if (allocated(self%modules_used)) then
+        call set_list(table, "modules-used",self%modules_used, error)
+    else 
+        call set_list(table, "modules-used",tmp_link, error)
+    end if
+    ! call set_list(table, "modules-used",self%modules_used, error)
     if (allocated(error)) return
-    call set_list(table, "include-dependencies",self%include_dependencies, error)
+    if (allocated(self%include_dependencies)) then
+        call set_list(table, "include-dependencies",self%include_dependencies, error)
+    else 
+        call set_list(table, "include-dependencies",tmp_link, error)
+    end if
+    ! call set_list(table, "include-dependencies",self%include_dependencies, error)
     if (allocated(error)) return
-    call set_list(table, "link-libraries",self%link_libraries, error)
+    if (allocated(self%link_libraries)) then
+        call set_list(table, "link-libraries",self%link_libraries, error)
+    else 
+        call set_list(table, "link-libraries",tmp_link, error)
+    end if
+    ! call set_list(table, "link-libraries",self%link_libraries, error)
     if (allocated(error)) return
 
 end subroutine srcfile_dump_to_toml
@@ -973,6 +999,7 @@ subroutine model_dump_to_toml(self, table, error)
     integer :: ierr, ii
     type(toml_table), pointer :: ptr,ptr_pkg
     character(27) :: unnamed
+    type(string_t), allocatable :: tmp_link(:)
 
     call set_string(table, "package-name", self%package_name, error, 'fpm_model_t')
     if (allocated(error)) return
@@ -997,11 +1024,26 @@ subroutine model_dump_to_toml(self, table, error)
     if (allocated(error)) return
     call set_string(table, "build-prefix", self%build_prefix, error, 'fpm_model_t')
     if (allocated(error)) return
-    call set_list(table, "include-dirs", self%include_dirs, error)
+    if (allocated(self%include_dirs)) then
+        call set_list(table, "include-dirs",self%include_dirs, error)
+    else 
+        call set_list(table, "include-dirs",tmp_link, error)
+    end if
+    ! call set_list(table, "include-dirs", self%include_dirs, error)
     if (allocated(error)) return
-    call set_list(table, "link-libraries", self%link_libraries, error)
+    if (allocated(self%link_libraries)) then
+        call set_list(table, "link-libraries",self%link_libraries, error)
+    else 
+        call set_list(table, "link-libraries",tmp_link, error)
+    end if
+    ! call set_list(table, "link-libraries", self%link_libraries, error)
     if (allocated(error)) return
-    call set_list(table, "external-modules", self%external_modules, error)
+    if (allocated(self%external_modules)) then
+        call set_list(table, "external-modules",self%external_modules, error)
+    else 
+        call set_list(table, "external-modules",tmp_link, error)
+    end if
+    ! call set_list(table, "external-modules", self%external_modules, error)
     if (allocated(error)) return
 
     call set_value(table, "include-tests", self%include_tests, error, 'fpm_model_t')

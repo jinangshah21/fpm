@@ -1587,6 +1587,7 @@ contains
 
         integer :: i,n,ierr
         type(toml_array), pointer :: array
+        type(string_t), allocatable :: tmp_pkg_dep(:)
 
         ! Dump parent class
         call self%dependency_config_t%dump_to_toml(table, error)
@@ -1605,8 +1606,13 @@ contains
         call set_value(table, "update", self%update, error, 'dependency_node_t')
         if (allocated(error)) return
         call set_value(table, "cached", self%cached, error, 'dependency_node_t')
-        if (allocated(error)) return        
-        call set_list(table, "package-dep",self%package_dep, error)
+        if (allocated(error)) return  
+        if (allocated(self%package_dep)) then
+          call set_list(table, "package-dep",self%package_dep, error)
+        else 
+          call set_list(table, "package-dep",tmp_pkg_dep, error)
+        end if
+        ! call set_list(table, "package-dep",self%package_dep, error)
         if (allocated(error)) return        
         
     end subroutine node_dump_to_toml

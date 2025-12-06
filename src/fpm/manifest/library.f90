@@ -231,7 +231,9 @@ contains
 
         select type (other=>that)
            type is (library_config_t)
+            if (allocated(this%include_dir)) then
               if (.not.this%include_dir==other%include_dir) return
+            end if
               if (allocated(this%source_dir).neqv.allocated(other%source_dir)) return
               if (allocated(this%source_dir)) then
                 if (.not.this%source_dir==other%source_dir) return
@@ -265,12 +267,18 @@ contains
 
         !> Error handling
         type(error_t), allocatable, intent(out) :: error
+        type(string_t), allocatable :: tmp_str(:)
 
         call set_string(table, "source-dir", self%source_dir, error, class_name)
         if (allocated(error)) return
         call set_string(table, "build-script", self%build_script, error, class_name)
         if (allocated(error)) return
-        call set_list(table, "include-dir", self%include_dir, error)
+        if (allocated(self%include_dir)) then 
+            call set_list(table, "include-dir", self%include_dir, error)
+        else 
+            call set_list(table, "include-dir", tmp_str, error)
+        end if
+        ! call set_list(table, "include-dir", self%include_dir, error)
         if (allocated(error)) return
         call set_string(table, "type", self%lib_type, error, class_name)
         if (allocated(error)) return

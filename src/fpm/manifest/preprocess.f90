@@ -241,10 +241,15 @@ contains
             if (allocated(this%name)) then
                 if (.not.(this%name==other%name)) return
             endif
-
-            if (.not.(this%suffixes==other%suffixes)) return
-            if (.not.(this%directories==other%directories)) return
-            if (.not.(this%macros==other%macros)) return
+            if (allocated(this%suffixes)) then
+               if (.not.(this%suffixes==other%suffixes)) return
+            end if
+            if (allocated(this%directories)) then
+               if (.not.(this%directories==other%directories)) return
+            end if
+            if (allocated(this%macros)) then
+               if (.not.(this%macros==other%macros)) return
+            end if
 
          class default
             ! Not the same type
@@ -267,14 +272,30 @@ contains
 
        !> Error handling
        type(error_t), allocatable, intent(out) :: error
+        type(string_t), allocatable :: tmp_link(:)
 
        call set_string(table, "name", self%name, error)
        if (allocated(error)) return
-       call set_list(table, "suffixes", self%suffixes, error)
+       if (allocated(self%suffixes)) then
+         call set_list(table, "suffixes", self%suffixes, error)
+       else 
+         call set_list(table, "suffixes", tmp_link, error)
+       end if
+      !  call set_list(table, "suffixes", self%suffixes, error)
        if (allocated(error)) return
-       call set_list(table, "directories", self%directories, error)
+       if (allocated(self%directories)) then
+         call set_list(table, "directories", self%directories, error)
+       else 
+         call set_list(table, "directories", tmp_link, error)
+       end if
+      !  call set_list(table, "directories", self%directories, error)
        if (allocated(error)) return
-       call set_list(table, "macros", self%macros, error)
+       if (allocated(self%macros)) then
+         call set_list(table, "macros", self%macros, error)
+       else 
+         call set_list(table, "macros", tmp_link, error)
+       end if
+      !  call set_list(table, "macros", self%macros, error)
        if (allocated(error)) return
 
      end subroutine dump_to_toml

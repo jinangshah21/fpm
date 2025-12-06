@@ -205,7 +205,9 @@ contains
 
         select type (other=>that)
            type is (executable_config_t)
-              if (.not.this%link==other%link) return
+              if (allocated(this%link)) then
+                if (.not.this%link==other%link) return
+              end if
               if (allocated(this%name).neqv.allocated(other%name)) return
               if (allocated(this%name)) then
                 if (.not.this%name==other%name) return
@@ -251,6 +253,7 @@ contains
         integer :: ierr, ii
         type(toml_table), pointer :: ptr_deps,ptr
         character(27) :: unnamed
+        type(string_t), allocatable :: tmp_link(:)
 
         call set_string(table, "name", self%name, error)
         if (allocated(error)) return
@@ -290,7 +293,12 @@ contains
 
         endif
 
-        call set_list(table, "link", self%link, error)
+        if (allocated(self%link)) then
+            call set_list(table, "link", self%link, error)
+        else 
+            call set_list(table, "link", tmp_link, error)
+        end if
+        ! call set_list(table, "link", self%link, error)
         if (allocated(error)) return
 
         1 format('UNNAMED_DEPENDENCY_',i0)
@@ -313,6 +321,7 @@ contains
         type(toml_key), allocatable :: keys(:),dep_keys(:)
         type(toml_table), pointer :: ptr_deps,ptr
         integer :: ii, jj, ierr
+        type(string_t), allocatable :: tmp_link(:)
 
         call table%get_keys(keys)
 
@@ -322,8 +331,12 @@ contains
         if (allocated(error)) return
         call get_value(table, "main", self%main)
         if (allocated(error)) return
-        call get_list(table, "link", self%link, error)
-
+        if (allocated(self%link)) then
+            call get_list(table, "link", self%link, error)
+        else
+            call get_list(table, "link", tmp_link, error)
+        end if
+        ! call get_list(table, "link", self%link, error)
         find_deps_table: do ii = 1, size(keys)
             if (keys(ii)%key=="dependencies") then
 

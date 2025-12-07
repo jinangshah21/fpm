@@ -360,7 +360,7 @@ function read_text_file(filename) result(string)
 
     open (newunit=fh, file=filename, status='old', action='read', &
             access='stream', form='unformatted')
-    inquire (fh, size=length)
+    inquire (file=filename, size=length)
     allocate (character(len=length) :: string)
     if (length == 0) return
     read (fh) string

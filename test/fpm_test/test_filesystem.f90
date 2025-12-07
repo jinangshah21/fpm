@@ -368,9 +368,10 @@ contains
         character(256) :: msg
         integer :: unit, i, ios
         
-        temp_file = get_temp_filename()
+        ! temp_file = get_temp_filename()
+        temp_file = "_lfortran_temporary_file_329372"
         
-        open(newunit=unit,file=temp_file,access='stream',action='write',iostat=ios)
+        open(newunit=unit,file=temp_file,access='stream',action='write',iostat=ios, form='unformatted')
         if (ios/=0) then 
             call test_failed(error, "cannot create temporary file")
             return

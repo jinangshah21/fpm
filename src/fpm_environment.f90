@@ -231,6 +231,7 @@ contains
         length=0
         if(NAME/='')then
            call get_environment_variable(NAME, length=howbig,status=stat,trim_name=.true.)
+           stat=0
            select case (stat)
            case (1)
                !*!print *, NAME, " is not defined in the environment. Strange..."
@@ -243,7 +244,7 @@ contains
                allocate(character(len=max(howbig,1)) :: VALUE)
                ! get value
                call get_environment_variable(NAME,VALUE,status=stat,trim_name=.true.)
-               if(stat/=0)VALUE=''
+            !    if(stat/=0)VALUE=''
            end select
         else
            VALUE=''

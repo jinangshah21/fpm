@@ -13,7 +13,7 @@ macros=["FPM_RELEASE_VERSION={version}"]
 
 [dependencies]
 toml-f.git = "https://github.com/jinangshah21/toml-f.git"
-toml-f.rev = "8c191574db70fe65c3b07d187fdea1e3504b1b5e"
+toml-f.rev = "cad23d9f6320985c8ad2e93cc8e0e5af4f6b400d"
 M_CLI2.git = "https://github.com/jinangshah21/M_CLI2.git"
 M_CLI2.rev = "600737dc23004c1efa10d2233d4a631d0521fd53"
 fortran-regex.git  = "https://github.com/jinangshah21/fortran-regex.git"

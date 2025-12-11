@@ -1536,7 +1536,7 @@ contains
          type is (dependency_node_t)
 
             ! Base class must match
-            if (.not.(this%dependency_config_t==other%dependency_config_t)) return
+            ! if (.not.(this%dependency_config_t==other%dependency_config_t)) return
 
             ! Extension must match
             if (.not.(this%done  .eqv.other%done)) return

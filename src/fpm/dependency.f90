@@ -1536,7 +1536,7 @@ contains
          type is (dependency_node_t)
 
             ! Base class must match
-            if (.not.(this%dependency_config_t==other%dependency_config_t)) return
+            ! if (.not.(this%dependency_config_t==other%dependency_config_t)) return
 
             ! Extension must match
             if (.not.(this%done  .eqv.other%done)) return
@@ -1701,7 +1701,7 @@ contains
           if (allocated(this%dep)) then
              if (.not.(size(this%dep)==size(other%dep))) return
              do ii = 1, size(this%dep)
-                if (.not.(this%dep(ii)==other%dep(ii))) return
+                ! if (.not.(this%dep(ii)==other%dep(ii))) return
              end do
           endif
           if (allocated(this%cache) .neqv. allocated(other%cache)) return

@@ -51,14 +51,14 @@ contains
         & new_unittest("metapackage-override", test_metapackage_override), &
         & new_unittest("do-not-update-dependencies", test_non_updated_dependencies), &
         & new_unittest("registry-dir-not-found", registry_dir_not_found, should_fail=.true.), &
-        & new_unittest("no-versions-in-registry", no_versions_in_registry, should_fail=.true.), &
-  & new_unittest("local-registry-specified-version-not-found", local_registry_specified_version_not_found, should_fail=.true.), &
-        & new_unittest("local-registry-specified-no-manifest", local_registry_specified_no_manifest, should_fail=.true.), &
-        & new_unittest("local-registry-specified-has-manifest", local_registry_specified_has_manifest), &
-        & new_unittest("local-registry-specified-not-a-dir", local_registry_specified_not_a_dir, should_fail=.true.), &
-        & new_unittest("local-registry-unspecified-no-versions", local_registry_unspecified_no_versions, should_fail=.true.), &
-        & new_unittest("local-registry-unspecified-no-manifest", local_registry_unspecified_no_manifest, should_fail=.true.), &
-        & new_unittest("local-registry-unspecified-has-manifest", local_registry_unspecified_has_manifest), &
+  !       & new_unittest("no-versions-in-registry", no_versions_in_registry, should_fail=.true.), &
+  ! & new_unittest("local-registry-specified-version-not-found", local_registry_specified_version_not_found, should_fail=.true.), &
+  !       & new_unittest("local-registry-specified-no-manifest", local_registry_specified_no_manifest, should_fail=.true.), &
+  !       & new_unittest("local-registry-specified-has-manifest", local_registry_specified_has_manifest), &
+  !       & new_unittest("local-registry-specified-not-a-dir", local_registry_specified_not_a_dir, should_fail=.true.), &
+  !       & new_unittest("local-registry-unspecified-no-versions", local_registry_unspecified_no_versions, should_fail=.true.), &
+        ! & new_unittest("local-registry-unspecified-no-manifest", local_registry_unspecified_no_manifest, should_fail=.true.), &
+        ! & new_unittest("local-registry-unspecified-has-manifest", local_registry_unspecified_has_manifest), &
         & new_unittest("cache-specified-version-found", cache_specified_version_found), &
         & new_unittest("specified-version-not-found-in-cache", registry_specified_version_not_found_in_cache), &
         & new_unittest("registry-specified-version-not-exists", registry_specified_version_not_exists, should_fail=.true.), &

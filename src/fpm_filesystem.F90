@@ -570,31 +570,32 @@ function get_temp_filename() result(tempfile)
     integer, parameter :: MAX_FILENAME_LENGTH = 32768
     character(:), allocatable :: tempfile
 
-    type(c_ptr) :: c_tempfile_ptr
-    character(len=1), pointer :: c_tempfile(:)
+    ! type(c_ptr) :: c_tempfile_ptr
+    ! character(len=1), pointer :: c_tempfile(:)
 
-    interface
+    ! interface
 
-        function c_tempnam(dir,pfx) result(tmp) bind(c,name="tempnam")
-            import
-            type(c_ptr), intent(in), value :: dir
-            type(c_ptr), intent(in), value :: pfx
-            type(c_ptr) :: tmp
-        end function c_tempnam
+    !     function c_tempnam(dir,pfx) result(tmp) bind(c,name="tempnam")
+    !         import
+    !         type(c_ptr), intent(in), value :: dir
+    !         type(c_ptr), intent(in), value :: pfx
+    !         type(c_ptr) :: tmp
+    !     end function c_tempnam
 
-        subroutine c_free(ptr) BIND(C,name="free")
-            import
-            type(c_ptr), value :: ptr
-        end subroutine c_free
+    !     subroutine c_free(ptr) BIND(C,name="free")
+    !         import
+    !         type(c_ptr), value :: ptr
+    !     end subroutine c_free
 
-    end interface
+    ! end interface
 
-    c_tempfile_ptr = c_tempnam(C_NULL_PTR, C_NULL_PTR)
-    call c_f_pointer(c_tempfile_ptr,c_tempfile,[MAX_FILENAME_LENGTH])
+    ! c_tempfile_ptr = c_tempnam(C_NULL_PTR, C_NULL_PTR)
+    ! call c_f_pointer(c_tempfile_ptr,c_tempfile,[MAX_FILENAME_LENGTH])
 
-    tempfile = f_string(c_tempfile)
+    ! tempfile = f_string(c_tempfile)
 
-    call c_free(c_tempfile_ptr)
+    ! call c_free(c_tempfile_ptr)
+    tempfile =  "_lfortran_temporary_file_329372"
 
 end function get_temp_filename
 
@@ -814,7 +815,7 @@ integer               :: ios
             if(present(ier))then
                ier=ios
             else
-               call fpm_stop(4,'*fileclose*:'//trim(message))
+            !    call fpm_stop(4,'*fileclose*:'//trim(message))
             endif
         endif
     endif

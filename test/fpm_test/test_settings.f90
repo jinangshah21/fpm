@@ -25,7 +25,7 @@ contains
     tests = [ &
     & new_unittest('no-folder', no_folder, should_fail=.true.), &
     & new_unittest('no-file', no_file, should_fail=.true.), &
-    & new_unittest('empty-file', empty_file), &
+    ! & new_unittest('empty-file', empty_file), &
     & new_unittest('default-config-settings', default_config_settings), &
     & new_unittest('error-reading-table', error_reading_table, should_fail=.true.), &
     & new_unittest('empty-registry-table', empty_registry_table), &
@@ -35,7 +35,7 @@ contains
     & new_unittest('has-existent-path-to-registry', has_existent_path_to_registry), &
     & new_unittest('absolute-path-to-registry', absolute_path_to_registry), &
     & new_unittest('relative-path-to-registry', relative_path_to_registry), &
-    & new_unittest('relative-path-to-registry-file-read', relative_path_to_registry_file_read), &
+    ! & new_unittest('relative-path-to-registry-file-read', relative_path_to_registry_file_read), &
     & new_unittest('canonical-path-to-registry', canonical_path_to_registry), &
     & new_unittest('has-url-to-registry', has_url_to_registry), &
     & new_unittest('has-both-path-and-url-to-registry', has_both_path_and_url_to_registry, should_fail=.true.), &

@@ -339,12 +339,11 @@ contains
 
         call add_target(targets,'test-package',FPM_TARGET_ARCHIVE,get_temp_filename())
 
-        call add_target(targets,'test-package',FPM_TARGET_OBJECT,get_temp_filename())
+        call add_target(targets,'test-package',FPM_TARGET_OBJECT,get_temp_filename()//"01")
 
-        call add_target(targets,'test-package',FPM_TARGET_OBJECT,get_temp_filename())
+        call add_target(targets,'test-package',FPM_TARGET_OBJECT,get_temp_filename()//"02")
 
-        call add_target(targets,'test-package',FPM_TARGET_OBJECT,get_temp_filename())
-
+        call add_target(targets,'test-package',FPM_TARGET_OBJECT,get_temp_filename()//"03")
         ! Library depends on all objects
         call add_dependency(targets(1)%ptr,targets(2)%ptr)
         call add_dependency(targets(1)%ptr,targets(3)%ptr)
@@ -476,9 +475,9 @@ contains
         integer :: i
 
         ! Create a new test package with a shared library
-        call add_target(targets, 'test-shared', FPM_TARGET_SHARED, get_temp_filename())
-        call add_target(targets, 'test-shared', FPM_TARGET_OBJECT, get_temp_filename())
-        call add_target(targets, 'test-shared', FPM_TARGET_OBJECT, get_temp_filename())
+        call add_target(targets, 'test-shared', FPM_TARGET_SHARED, get_temp_filename()//"01")
+        call add_target(targets, 'test-shared', FPM_TARGET_OBJECT, get_temp_filename()//"02")
+        call add_target(targets, 'test-shared', FPM_TARGET_OBJECT, get_temp_filename()//"03")
 
         ! Shared library depends on the two object files
         call add_dependency(targets(1)%ptr, targets(2)%ptr)

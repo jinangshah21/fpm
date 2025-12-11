@@ -1799,8 +1799,14 @@ logical function check_fortran_source_runs(self, input, compile_flags, link_flag
     call self%link(exe, ldflags//" "//object, logf, stat)
 
     !> Run and retrieve exit code
-    if (stat==0) &
-    call run(exe,echo=.false., exitstat=stat, verbose=.false., redirect=logf)
+    if (stat==0) then
+        select case (get_os_type())
+        case (OS_WINDOWS, OS_CYGWIN)
+            call run(exe, echo=.false., exitstat=stat, verbose=.false., redirect=logf)
+        case default
+            call run("./"//exe, echo=.false., exitstat=stat, verbose=.false., redirect=logf)
+        end select
+    end if
 
     !> Successful exit on 0 exit code
     success = stat==0

@@ -78,6 +78,7 @@ contains
             & 'end program test'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -152,6 +153,7 @@ contains
             & 'end program test'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -222,6 +224,7 @@ contains
             & 'end program test'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -293,6 +296,7 @@ contains
             & 'end program test'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -355,6 +359,7 @@ contains
             & 'end program my_program'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -412,6 +417,7 @@ contains
             & 'end program'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -460,6 +466,7 @@ contains
             & 'end program'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -524,6 +531,7 @@ contains
             & '! A trailing comment outside of module'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -585,6 +593,7 @@ contains
             & 'end function'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -642,6 +651,7 @@ contains
             & 'end module mod2'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -702,6 +712,7 @@ contains
             & 'end module test'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -788,6 +799,7 @@ contains
             & 'end my_program'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -856,6 +868,7 @@ contains
             & 'end program my_program'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -900,6 +913,7 @@ contains
             & 'end submodule test'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -959,6 +973,7 @@ contains
             & 'end submodule test'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -1019,6 +1034,7 @@ contains
             & 'end subroutine my_sub'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -1071,6 +1087,7 @@ contains
             & '}'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_c_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -1140,6 +1157,7 @@ contains
             & 'end program test'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -1167,6 +1185,7 @@ contains
             & 'end program test'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -1193,6 +1212,7 @@ contains
             & 'end module test'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return
@@ -1219,6 +1239,7 @@ contains
             & 'end submodule test'
         close(unit)
 
+        allocate(f_source)
         f_source = parse_f_source(temp_file,error)
         if (allocated(error)) then
             return

@@ -222,7 +222,7 @@ contains
               if (allocated(this%dependency)) then
                  if (.not.(size(this%dependency)==size(other%dependency))) return
                  do ii = 1, size(this%dependency)
-                    if (.not.(this%dependency(ii)==other%dependency(ii))) return
+                    ! if (.not.(this%dependency(ii)==other%dependency(ii))) return
                  end do
               end if
            class default

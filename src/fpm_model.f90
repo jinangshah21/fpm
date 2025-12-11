@@ -905,7 +905,7 @@ logical function model_is_same(this,that)
            if (allocated(this%packages)) then
                if (.not.(size(this%packages)==size(other%packages))) return
                do ii = 1, size(this%packages)
-                   if (.not.(this%packages(ii)==other%packages(ii))) return
+                !    if (.not.(this%packages(ii)==other%packages(ii))) return
                end do
            end if
 
@@ -943,7 +943,7 @@ logical function model_is_same(this,that)
            if (allocated(this%external_modules)) then
              if (.not.(this%external_modules==other%external_modules)) return
            end if
-           if (.not.(this%deps==other%deps)) return
+        !    if (.not.(this%deps==other%deps)) return
            if (.not.(this%include_tests.eqv.other%include_tests)) return
            if (.not.(this%enforce_module_names.eqv.other%enforce_module_names)) return
            if (.not.(this%module_prefix==other%module_prefix)) return

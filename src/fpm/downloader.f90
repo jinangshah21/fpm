@@ -13,7 +13,7 @@ module fpm_downloader
   !> This type could be entirely avoided but it is quite practical because it can be mocked for testing.
   type downloader_t
   contains
-    procedure, nopass :: get_pkg_data, get_file, upload_form, unpack
+    procedure, nopass :: get_pkg_data, get_file, unpack
   end type
 
 contains

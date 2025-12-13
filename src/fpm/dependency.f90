@@ -759,6 +759,7 @@ contains
     type(version_t) :: version
     integer :: stat, unit
     type(json_object) :: json
+    type(version_t), allocatable :: req_ver
     class(downloader_t), allocatable :: downloader
 
     if (present(downloader_)) then
@@ -792,7 +793,11 @@ contains
 
     ! Include namespace and package name in the target url and download package data.
     target_url = global_settings%registry_settings%url//'/packages/'//self%namespace//'/'//self%name
-    call downloader%get_pkg_data(target_url, self%requested_version, tmp_file, json, error)
+    if (allocated(self%requested_version)) then
+      call downloader%get_pkg_data(target_url, self%requested_version, tmp_file, json, error)
+    else 
+      call downloader%get_pkg_data(target_url, req_ver, tmp_file, json, error)
+    end if
     close (unit, status='delete')
     if (allocated(error)) return
 

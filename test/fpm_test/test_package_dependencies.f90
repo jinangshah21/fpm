@@ -1236,10 +1236,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1253,10 +1258,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": "integer expected"}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1269,10 +1279,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 123}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1285,10 +1300,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 123, "message": 123}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1301,10 +1321,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 123, "message": "Really bad error message"}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1317,10 +1342,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 200}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1333,10 +1363,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 200, "data": 123}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1349,11 +1384,16 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     allocate (node%requested_version)
     call json_loads(j_value, '{"code": 200, "data": {"latest_version_data": 123}}') ! Expected key: "version_data"
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1366,10 +1406,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 200, "data": {"version_data": 123}}') ! Expected key: "latest_version_data"
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1382,10 +1427,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 200, "data": {"latest_version_data": 123}}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1398,10 +1448,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 200, "data": {"latest_version_data": {}}}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1414,10 +1469,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 200, "data": {"latest_version_data": {"download_url": 123}}}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1430,10 +1490,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 200, "data": {"latest_version_data": {"download_url": "abc"}}}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1446,10 +1511,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 200, "data": {"latest_version_data": {"download_url": "abc", "version": 123}}}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1462,10 +1532,15 @@ contains
     character(:), allocatable :: url
     type(version_t) :: version
     type(json_object) :: json
-    class(json_value), allocatable :: j_value
+    type(json_object), pointer :: tmp_json
+    class(json_value), allocatable, target :: j_value
 
     call json_loads(j_value, '{"code": 200, "data": {"latest_version_data": {"download_url": "abc", "version": "abc"}}}')
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
 
     call check_and_read_pkg_data(json, node, url, version, error)
 
@@ -1539,9 +1614,10 @@ contains
     type(version_t), allocatable, intent(in) :: version
     character(*), intent(in) :: tmp_pkg_file
     type(json_object), intent(out) :: json
+    type(json_object),  pointer :: tmp_json
     type(error_t), allocatable, intent(out) :: error
 
-    class(json_value), allocatable :: j_value
+    class(json_value), allocatable, target :: j_value
 
     if (allocated(version)) then
       if (version%s() == '9.9.9') then
@@ -1553,7 +1629,12 @@ contains
       call json_loads(j_value, '{"code": 200, "data": {"latest_version_data": {"version": "0.1.0", "download_url": "abc"}}}')
     end if
 
-    json = cast_to_object(j_value)
+    select type(j_value)
+    type is (json_object)
+        tmp_json => j_value
+    end select
+    json = tmp_json
+    ! json = cast_to_object(j_value)
   end
 
   subroutine get_file(url, tmp_pkg_file, error)

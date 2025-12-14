@@ -818,13 +818,13 @@ subroutine prune_build_targets(targets, root_package, prune_unused_objects)
         if (targets(i)%ptr%target_type == FPM_TARGET_EXECUTABLE) then
 
             nexec = nexec + 1
-            call collect_used_modules(targets(i)%ptr)
+            call collect_used_modules(targets(i)%ptr, modules_used)
 
         elseif (allocated(targets(i)%ptr%source)) then
 
             if (targets(i)%ptr%source%unit_type == FPM_UNIT_SUBPROGRAM) then
 
-                call collect_used_modules(targets(i)%ptr)
+                call collect_used_modules(targets(i)%ptr, modules_used)
 
             end if
 
@@ -841,7 +841,7 @@ subroutine prune_build_targets(targets, root_package, prune_unused_objects)
             if (targets(i)%ptr%package_name == root_package%name .and. &
                  all(targets(i)%ptr%target_type /= [FPM_TARGET_ARCHIVE,FPM_TARGET_SHARED])) then
 
-                call collect_used_modules(targets(i)%ptr)
+                call collect_used_modules(targets(i)%ptr, modules_used)
 
             end if
 
@@ -944,8 +944,9 @@ subroutine prune_build_targets(targets, root_package, prune_unused_objects)
     contains
 
     !> Recursively collect which modules are actually used
-    recursive subroutine collect_used_modules(target)
+    recursive subroutine collect_used_modules(target, modules_used)
         type(build_target_t), intent(inout) :: target
+        type(string_t), allocatable :: modules_used(:)
 
         integer :: j, k
 
@@ -971,7 +972,7 @@ subroutine prune_build_targets(targets, root_package, prune_unused_objects)
                     if (allocated(targets(k)%ptr%source)) then
                         if (targets(k)%ptr%source%unit_type == FPM_UNIT_SUBMODULE) then
                             if (target%source%modules_provided(j)%s .in. targets(k)%ptr%source%parent_modules) then
-                                call collect_used_modules(targets(k)%ptr)
+                                call collect_used_modules(targets(k)%ptr, modules_used)
                             end if
                         end if
                     end if
@@ -984,7 +985,7 @@ subroutine prune_build_targets(targets, root_package, prune_unused_objects)
         do j=1,size(target%dependencies)
 
             if (target%dependencies(j)%ptr%target_type /= FPM_TARGET_ARCHIVE) then
-                call collect_used_modules(target%dependencies(j)%ptr)
+                call collect_used_modules(target%dependencies(j)%ptr, modules_used)
             end if
 
         end do

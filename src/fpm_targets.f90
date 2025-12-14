@@ -715,9 +715,11 @@ subroutine resolve_module_dependencies(targets,external_modules,error)
 
             do j=1,size(targets(i)%ptr%source%modules_used)
 
-                if (targets(i)%ptr%source%modules_used(j)%s .in. targets(i)%ptr%source%modules_provided) then
-                    ! Dependency satisfied in same file, skip
-                    cycle
+                if (size(targets(i)%ptr%source%modules_provided) > 0) then
+                    if (targets(i)%ptr%source%modules_used(j)%s .in. targets(i)%ptr%source%modules_provided) then
+                        ! Dependency satisfied in same file, skip
+                        cycle
+                    end if
                 end if
 
                 if (targets(i)%ptr%source%modules_used(j)%s .in. external_modules) then

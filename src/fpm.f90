@@ -304,6 +304,7 @@ subroutine check_modules_for_duplicates(model, duplicates_found)
     integer :: maxsize
     integer :: i,j,k,l,m,modi
     type(string_t), allocatable :: modules(:)
+    type(srcfile_t) :: tmp_source
     logical :: duplicates_found
     ! Initialise the size of array
     maxsize = 0
@@ -333,7 +334,8 @@ subroutine check_modules_for_duplicates(model, duplicates_found)
                 " in ",model%packages(k)%sources(l)%file_name," is a duplicate"
               duplicates_found = .true.
             else
-              modules(modi) = model%packages(k)%sources(l)%modules_provided(m)
+              tmp_source = model%packages(k)%sources(l)
+              modules(modi) = tmp_source%modules_provided(m)
               modi = modi + 1
             end if
           end do

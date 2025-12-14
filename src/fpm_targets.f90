@@ -666,9 +666,15 @@ end subroutine add_old_target
 subroutine add_dependency(target, dependency)
     type(build_target_t), intent(inout) :: target
     type(build_target_t) , intent(in), target :: dependency
+    type(build_target_ptr), allocatable :: tmp_dep(:)
 
-    target%dependencies = [target%dependencies, build_target_ptr(dependency)]
-
+    allocate( tmp_dep( size(target%dependencies) + 1 ) )
+    if (size(target%dependencies) > 0) then
+        tmp_dep(1:size(target%dependencies)) = target%dependencies
+    end if
+    tmp_dep(size(tmp_dep)) = build_target_ptr(dependency)
+    call move_alloc( tmp_dep, target%dependencies )
+    ! target%dependencies = [target%dependencies, build_target_ptr(dependency)]
 end subroutine add_dependency
 
 

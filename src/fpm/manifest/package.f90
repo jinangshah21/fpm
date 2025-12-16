@@ -59,6 +59,8 @@ module fpm_manifest_package
     interface unique_programs
         module procedure :: unique_programs1
         module procedure :: unique_programs2
+        module procedure :: unique_programs3
+        module procedure :: unique_programs4
     end interface unique_programs
 
 
@@ -481,7 +483,7 @@ contains
     subroutine unique_programs1(executable, error)
 
         !> Array of executables
-        class(executable_config_t), intent(in) :: executable(:)
+        type(executable_config_t), intent(in) :: executable(:)
 
         !> Error handling
         type(error_t), allocatable, intent(out) :: error
@@ -502,15 +504,62 @@ contains
 
     end subroutine unique_programs1
 
+    subroutine unique_programs3(example, error)
+
+        !> Array of examples
+        type(example_config_t), intent(in) :: example(:)
+
+        !> Error handling
+        type(error_t), allocatable, intent(out) :: error
+
+        integer :: i, j
+
+        do i = 1, size(example)
+            do j = 1, i - 1
+                if (example(i)%name == example(j)%name) then
+                    call fatal_error(error, "The program named '"//&
+                        example(j)%name//"' is duplicated. "//&
+                        "Unique program names are required.")
+                    exit
+                end if
+            end do
+        end do
+        if (allocated(error)) return
+
+    end subroutine unique_programs3
+
+    subroutine unique_programs4(test, error)
+
+        !> Array of tests
+        type(test_config_t), intent(in) :: test(:)
+
+        !> Error handling
+        type(error_t), allocatable, intent(out) :: error
+
+        integer :: i, j
+
+        do i = 1, size(test)
+            do j = 1, i - 1
+                if (test(i)%name == test(j)%name) then
+                    call fatal_error(error, "The program named '"//&
+                        test(j)%name//"' is duplicated. "//&
+                        "Unique program names are required.")
+                    exit
+                end if
+            end do
+        end do
+        if (allocated(error)) return
+
+    end subroutine unique_programs4
 
     !> Check whether or not the names in a set of executables are unique
-    subroutine unique_programs2(executable_i, executable_j, error)
+    subroutine unique_programs2(executable_i, example_j, error)
 
         !> Array of executables
         class(executable_config_t), intent(in) :: executable_i(:)
 
         !> Array of executables
-        class(executable_config_t), intent(in) :: executable_j(:)
+        type(example_config_t), intent(in) :: example_j(:)
 
         !> Error handling
         type(error_t), allocatable, intent(out) :: error
@@ -518,10 +567,10 @@ contains
         integer :: i, j
 
         do i = 1, size(executable_i)
-            do j = 1, size(executable_j)
-                if (executable_i(i)%name == executable_j(j)%name) then
+            do j = 1, size(example_j)
+                if (executable_i(i)%name == example_j(j)%name) then
                     call fatal_error(error, "The program named '"//&
-                        executable_j(j)%name//"' is duplicated. "//&
+                        example_j(j)%name//"' is duplicated. "//&
                         "Unique program names are required.")
                     exit
                 end if
@@ -594,7 +643,7 @@ contains
             if (allocated(this%profiles)) then
                 if (.not.size(this%profiles)==size(other%profiles)) return
                 do ii=1,size(this%profiles)
-                    if (.not.this%profiles(ii)==other%profiles(ii)) return
+                    ! if (.not.this%profiles(ii)==other%profiles(ii)) return
                 end do
             end if
             if (allocated(this%example).neqv.allocated(other%example)) return

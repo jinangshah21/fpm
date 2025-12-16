@@ -637,14 +637,14 @@ module fpm_manifest_profile
           call validate_compiler_name(profile_name, is_valid)
           if (is_valid) then
             profile_name = "all"
-            comp_list = prof_list(iprof:iprof)
+            comp_list = [prof_list(iprof:iprof)]
             prof_node=>table
             call traverse_compilers(profile_name, comp_list, prof_node, error, profiles_size=profiles_size)
             if (allocated(error)) return
           else
             call validate_os_name(profile_name, is_valid)
             if (is_valid) then
-              os_list = prof_list(iprof:iprof)
+              os_list = [prof_list(iprof:iprof)]
               profile_name = 'all'
               compiler_name = DEFAULT_COMPILER
               call traverse_oss_for_size(profile_name, compiler_name, os_list, table, profiles_size, error)
@@ -674,14 +674,14 @@ module fpm_manifest_profile
           call validate_compiler_name(profile_name, is_valid)
           if (is_valid) then
             profile_name = "all"
-            comp_list = prof_list(iprof:iprof)
+            comp_list = [prof_list(iprof:iprof)]
             prof_node=>table
             call traverse_compilers(profile_name, comp_list, prof_node, error, profiles=profiles, profindex=profindex)
             if (allocated(error)) return
           else
             call validate_os_name(profile_name, is_valid)
             if (is_valid) then
-              os_list = prof_list(iprof:iprof)
+              os_list = [prof_list(iprof:iprof)]
               profile_name = 'all'
               compiler_name = DEFAULT_COMPILER
               prof_node=>table

@@ -371,7 +371,8 @@ contains
         ! temp_file = get_temp_filename()
         temp_file = "_lfortran_temporary_file_329372"
         
-        open(newunit=unit,file=temp_file,access='stream',action='write',iostat=ios, form='unformatted')
+        open(newunit=unit,file=temp_file,access='stream',&
+                & action='write',iostat=ios, form='unformatted', status='replace')
         if (ios/=0) then 
             call test_failed(error, "cannot create temporary file")
             return

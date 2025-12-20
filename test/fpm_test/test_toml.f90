@@ -542,7 +542,7 @@ contains
         do ii = nword, 1, -1
 
             ! Shorten list
-            list = list(1:ii)
+            list = [list(1:ii)]
 
             ! Set list to table
             table = toml_table()

@@ -107,7 +107,7 @@ integer :: length
    ! execute the fpm(1) commands
    do i=1,size(cmds)
       message=''
-      path= prog //' '//cmds(i)
+      path= 'fpm '//cmds(i)
       call execute_command_line(path,exitstat=estat,cmdstat=cstat,cmdmsg=message)
       write(*,'(*(g0))')'<INFO>CMD=',path,' EXITSTAT=',estat,' CMDSTAT=',cstat,' MESSAGE=',trim(message)
       tally=[tally,all([estat==0,cstat==0])]

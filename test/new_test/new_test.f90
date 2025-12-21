@@ -128,8 +128,12 @@ character(len=:),allocatable  :: rm_command
 
          if(size(expected)/=size(file_names))then
             write(*,*)'WARNING: unexpected number of files in file list=',size(file_names),' expected ',size(expected)
-            write(*,'("EXPECTED: ",*(g0:,","))')(scr//trim(expected(j)),j=1,size(expected))
-            write(*,'("FOUND:    ",*(g0:,","))')(trim(file_names(j)%s),j=1,size(file_names))
+            do j = 1, size(expected)
+               write(*,'("EXPECTED: ",*(g0:,","))')(scr//trim(expected(j)))
+            end do
+            do j = 1, size(file_names)
+               write(*,'("FOUND:    ",*(g0:,","))') trim(file_names(j)%s)
+            end do
          endif
 
          do j=1,size(expected)

@@ -830,7 +830,10 @@ contains
         if(allocated(lines))then
            ii=size(lines)
            if(ii > 0 .and. len(lines)> 0) then
-               write(stdout,'(g0)')(trim(lines(iii)), iii=1, ii)
+            !    write(stdout,'(g0)')(trim(lines(iii)), iii=1, ii) 
+                do iii = 1, ii
+                    write(stdout,'(g0)') trim(lines(iii))
+                end do 
            else
                write(stdout,'(a)')'<WARNING> *printhelp* output requested is empty'
            endif

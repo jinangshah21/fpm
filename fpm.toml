@@ -13,15 +13,15 @@ macros=["FPM_RELEASE_VERSION={version}"]
 
 [dependencies]
 toml-f.git = "https://github.com/jinangshah21/toml-f.git"
-toml-f.rev = "cad23d9f6320985c8ad2e93cc8e0e5af4f6b400d"
+toml-f.rev = "65ef20430e2543ac89a5558a11ae1c8404d46763"
 M_CLI2.git = "https://github.com/jinangshah21/M_CLI2.git"
-M_CLI2.rev = "600737dc23004c1efa10d2233d4a631d0521fd53"
+M_CLI2.rev = "edf5c93091ff257eeefb916045ab47d76a3c358e"
 fortran-regex.git  = "https://github.com/jinangshah21/fortran-regex.git"
 fortran-regex.rev  = "c3807f49bf3a88df9b1527b2c49fc956abb77398"
 jonquil.git = "https://github.com/jinangshah21/jonquil.git"
-jonquil.rev = "92077d0c678a9ca85f4937a139c45938f51a3271"
-fortran-shlex.git = "https://github.com/jinangshah21/fortran-shlex"
-fortran-shlex.rev = "a030f1b9754ac3e6c5aa17fed01e5c2d767b947b"
+jonquil.rev = "1055a955a87fd16f88be93a4779cee54fdb2c70a"
+fortran-shlex.git = "https://github.com/perazz/fortran-shlex"
+fortran-shlex.rev = "e20b6f86c82e33fae78b54b074bab5369efde6a3"
 
 [[test]]
 name = "cli-test"

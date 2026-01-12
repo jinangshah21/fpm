@@ -370,7 +370,8 @@ contains
         
         temp_file = get_temp_filename()
         
-        open(newunit=unit,file=temp_file,access='stream', action='write',iostat=ios, status='replace')
+        open(newunit=unit,file=temp_file,access='stream',&
+            & action='write',iostat=ios, form='unformatted', status='replace')
         if (ios/=0) then 
             call test_failed(error, "cannot create temporary file")
             return

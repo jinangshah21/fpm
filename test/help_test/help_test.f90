@@ -74,7 +74,7 @@ integer :: length
    ! check that output has NAME SYNOPSIS DESCRIPTION
       do i=1,size(names)
          write(*,*)'<INFO>check '//names(i)//' for NAME SYNOPSIS DESCRIPTION'
-         path= 'fpm help '//names(i)//' >fpm_scratch_help.txt'
+         path= prog // ' help '//names(i)//' >fpm_scratch_help.txt'
          message=''
          call execute_command_line(path,exitstat=estat,cmdstat=cstat,cmdmsg=message)
          write(*,'(*(g0))')'<INFO>CMD=',path,' EXITSTAT=',estat,' CMDSTAT=',cstat,' MESSAGE=',trim(message)
@@ -107,7 +107,7 @@ integer :: length
    ! execute the fpm(1) commands
    do i=1,size(cmds)
       message=''
-      path= 'fpm '//cmds(i)
+      path= prog //' '//cmds(i)
       call execute_command_line(path,exitstat=estat,cmdstat=cstat,cmdmsg=message)
       write(*,'(*(g0))')'<INFO>CMD=',path,' EXITSTAT=',estat,' CMDSTAT=',cstat,' MESSAGE=',trim(message)
       tally=[tally,all([estat==0,cstat==0])]

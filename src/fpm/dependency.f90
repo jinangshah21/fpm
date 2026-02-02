@@ -387,6 +387,7 @@ contains
       integer :: i,nit
       integer, parameter   :: MAXIT = 50
       logical, allocatable :: finished(:)
+      logical              :: temp_var
       type(string_t), allocatable :: old_package_dep(:)
       
       if (self%ndep<1) then 
@@ -396,10 +397,16 @@ contains
       
       nit = 0
       allocate(finished(self%ndep),source=.false.)
-      do while (.not.all(finished) .and. nit<MAXIT)
+      ! print *, " size(finished)=", size(finished)
+      !     print *, "finished=", finished
+      temp_var = .not.all(finished) .and. nit<MAXIT
+      do while (temp_var)
         
           nit = nit+1
-      
+          ! print *, " size(finished)=", size(finished)
+          ! print *, "finished=", finished
+          ! print *, "all(finished)=", all(finished)
+          ! print *, ".not.all(finished) .and. nit<MAXIT", .not.all(finished) .and. nit<MAXIT
           do i = 1, self%ndep
             
               ! Save old deps
@@ -411,7 +418,7 @@ contains
               finished(i) = all_alloc(self%dep(i)%package_dep, old_package_dep)
               
           end do  
-      
+          temp_var = .not.all(finished) .and. nit<MAXIT
       end do
       
       if (nit>=MAXIT) call fatal_error(error, "Infinite loop detected computing the dependency graph")
